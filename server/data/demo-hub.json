@@ -1,0 +1,1376 @@
+{
+  "id": "demo",
+  "name": "Sirkulaere Sunndal Hub",
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z",
+  "companies": {
+    "hydro-sunndal": {
+      "id": "hydro-sunndal",
+      "name": "Hydro Sunndal AS",
+      "shortName": "Hydro",
+      "sector": "Aluminiumsproduksjon",
+      "description": "Norges største aluminiumsverk med en årlig produksjonskapasitet på over 400 000 tonn primær aluminium. Anvender fornybar vannkraft og er en hjørnesteinsbedrift i Sunndal.",
+      "color": "#3B82F6",
+      "icon": "Factory",
+      "coordinates": [8.56, 62.67],
+      "annualEnergyGWh": 6827,
+      "annualWasteTonnes": 49738,
+      "employeeCount": 700,
+      "provenance": { "source": "Mepex Materialstrømsanalyse – Hydro Sunndal", "confidence": "verified", "date": "2024" }
+    },
+    "sunndal-energi": {
+      "id": "sunndal-energi",
+      "name": "Sunndal Energi AS",
+      "shortName": "Energi",
+      "sector": "Energiforsyning og fjernvarme",
+      "description": "Regional energileverandor som distribuerer fjernvarme i Sunndal-regionen. Opererer fjernvarmenettet og formidler spillvarme fra industrien til kommunale og naeringsbygg.",
+      "color": "#F59E0B",
+      "icon": "Zap",
+      "coordinates": [8.55, 62.68],
+      "annualEnergyGWh": 45,
+      "annualWasteTonnes": 20,
+      "employeeCount": 45,
+      "provenance": { "source": "Mepex Materialstrømsanalyse – Sunndal Energi", "confidence": "verified", "date": "2024" }
+    },
+    "ottem-recycling": {
+      "id": "ottem-recycling",
+      "name": "Ottem Recycling AS",
+      "shortName": "Ottem",
+      "sector": "Gjenvinning og avfallshandtering",
+      "description": "Spesialisert gjenvinningsbedrift som handterer industrielt og kommunalt avfall. Prosesserer metaller, plast og organisk avfall for gjenbruk og materialgjenvinning.",
+      "color": "#10B981",
+      "icon": "Recycle",
+      "coordinates": [8.57, 62.66],
+      "annualEnergyGWh": 5,
+      "annualWasteTonnes": 5200,
+      "employeeCount": 25,
+      "provenance": { "source": "Mepex Materialstrømsanalyse – Ottem Recycling", "confidence": "verified", "date": "2024" }
+    },
+    "storvik": {
+      "id": "storvik",
+      "name": "Storvik AS",
+      "shortName": "Storvik",
+      "sector": "Verkstedsindustri og vedlikehold",
+      "description": "Verkstedsbedrift med spesialkompetanse innen vedlikehold og service for prosessindustri. Leverer mekanisk vedlikehold, sveisearbeid og modifikasjoner til industrien i Sunndal.",
+      "color": "#8B5CF6",
+      "icon": "Wrench",
+      "coordinates": [8.54, 62.67],
+      "annualEnergyGWh": 1.6,
+      "annualWasteTonnes": 244,
+      "employeeCount": 120,
+      "provenance": { "source": "Mepex Materialstrømsanalyse – Storvik", "confidence": "verified", "date": "2024" }
+    },
+    "industrikraft": {
+      "id": "industrikraft",
+      "name": "Industrikraft AS",
+      "shortName": "Industrikraft",
+      "sector": "Industriell krafthandel",
+      "description": "Spesialisert krafthandelsselskap som sikrer konkurransedyktige stromavtaler for energiintensiv industri. Handterer kraftkjop, -salg og portefoljestyring.",
+      "color": "#EF4444",
+      "icon": "BatteryCharging",
+      "coordinates": [8.58, 62.68],
+      "annualEnergyGWh": 500,
+      "annualWasteTonnes": 10,
+      "employeeCount": 20,
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    "sunndal-kommune": {
+      "id": "sunndal-kommune",
+      "name": "Sunndal kommune",
+      "shortName": "Kommune",
+      "sector": "Offentlig forvaltning",
+      "description": "Sunndal kommune med ansvar for kommunal infrastruktur, avfallshandtering, skoler og offentlige bygg. Arbeider aktivt med grønn omstilling og sirkulaerokonomi.",
+      "color": "#06B6D4",
+      "icon": "Landmark",
+      "coordinates": [8.56, 62.66],
+      "annualEnergyGWh": 80,
+      "annualWasteTonnes": 3000,
+      "employeeCount": 800,
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    }
+  },
+  "sankeyNodes": [
+    { "id": "hydro-sunndal", "label": "Hydro Sunndal", "color": "#3B82F6" },
+    { "id": "sunndal-energi", "label": "Sunndal Energi", "color": "#F59E0B" },
+    { "id": "ottem-recycling", "label": "Ottem Recycling", "color": "#10B981" },
+    { "id": "storvik", "label": "Storvik", "color": "#8B5CF6" },
+    { "id": "industrikraft", "label": "Industrikraft", "color": "#EF4444" },
+    { "id": "sunndal-kommune", "label": "Sunndal kommune", "color": "#06B6D4" },
+    { "id": "str\u00f8m", "label": "Str\u00f8m", "color": "#FBBF24" },
+    { "id": "spillvarme", "label": "Spillvarme", "color": "#F97316" },
+    { "id": "fjernvarme", "label": "Fjernvarme", "color": "#EF4444" },
+    { "id": "biogass", "label": "Biogass", "color": "#22C55E" }
+  ],
+  "energyFlows": [
+    {
+      "source": "industrikraft",
+      "target": "str\u00f8m",
+      "value": 500,
+      "type": "electricity",
+      "status": "existing",
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "source": "str\u00f8m",
+      "target": "hydro-sunndal",
+      "value": 1800,
+      "type": "electricity",
+      "status": "existing",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "source": "str\u00f8m",
+      "target": "sunndal-kommune",
+      "value": 80,
+      "type": "electricity",
+      "status": "existing",
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "source": "str\u00f8m",
+      "target": "ottem-recycling",
+      "value": 5,
+      "type": "electricity",
+      "status": "existing",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Ottem Recycling", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "source": "str\u00f8m",
+      "target": "storvik",
+      "value": 1.6,
+      "type": "electricity",
+      "status": "existing",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Storvik", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "source": "hydro-sunndal",
+      "target": "spillvarme",
+      "value": 148.4,
+      "type": "waste-heat",
+      "status": "existing",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Spillvarmepotensial", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "source": "spillvarme",
+      "target": "fjernvarme",
+      "value": 30.4,
+      "type": "waste-heat",
+      "status": "existing",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Sunndal Energi", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "source": "fjernvarme",
+      "target": "sunndal-energi",
+      "value": 30.4,
+      "type": "heat",
+      "status": "existing",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Sunndal Energi", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "source": "sunndal-energi",
+      "target": "sunndal-kommune",
+      "value": 25,
+      "type": "heat",
+      "status": "existing",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Sunndal Energi", "confidence": "estimated" }
+    },
+    {
+      "source": "spillvarme",
+      "target": "fjernvarme",
+      "value": 118,
+      "type": "waste-heat",
+      "status": "potential",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Utvidet spillvarmeutnyttelse", "confidence": "projected", "date": "2024" }
+    },
+    {
+      "source": "fjernvarme",
+      "target": "storvik",
+      "value": 1,
+      "type": "heat",
+      "status": "potential",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "source": "fjernvarme",
+      "target": "ottem-recycling",
+      "value": 2,
+      "type": "heat",
+      "status": "potential",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "source": "sunndal-kommune",
+      "target": "biogass",
+      "value": 3.5,
+      "type": "biogas",
+      "status": "potential",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biogass-case", "confidence": "projected" }
+    },
+    {
+      "source": "ottem-recycling",
+      "target": "biogass",
+      "value": 2.0,
+      "type": "biogas",
+      "status": "potential",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biogass-case", "confidence": "projected" }
+    },
+    {
+      "source": "biogass",
+      "target": "storvik",
+      "value": 1.5,
+      "type": "biogas",
+      "status": "planned",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    }
+  ],
+  "surplusDeficitData": [
+    { "companyId": "hydro-sunndal", "electricity": -450, "heat": -30, "wasteHeat": 130, "season": "winter" },
+    { "companyId": "sunndal-energi", "electricity": 0, "heat": 12, "wasteHeat": 0, "season": "winter" },
+    { "companyId": "ottem-recycling", "electricity": -1, "heat": -2, "wasteHeat": 0, "season": "winter" },
+    { "companyId": "storvik", "electricity": -0.5, "heat": -0.4, "wasteHeat": 0, "season": "winter" },
+    { "companyId": "industrikraft", "electricity": 80, "heat": 0, "wasteHeat": 0, "season": "winter" },
+    { "companyId": "sunndal-kommune", "electricity": -25, "heat": -35, "wasteHeat": 0, "season": "winter" },
+    { "companyId": "hydro-sunndal", "electricity": -300, "heat": -10, "wasteHeat": 140, "season": "spring" },
+    { "companyId": "sunndal-energi", "electricity": 0, "heat": 8, "wasteHeat": 0, "season": "spring" },
+    { "companyId": "ottem-recycling", "electricity": -0.5, "heat": -0.5, "wasteHeat": 0, "season": "spring" },
+    { "companyId": "storvik", "electricity": -0.4, "heat": -0.2, "wasteHeat": 0, "season": "spring" },
+    { "companyId": "industrikraft", "electricity": 150, "heat": 0, "wasteHeat": 0, "season": "spring" },
+    { "companyId": "sunndal-kommune", "electricity": -15, "heat": -12, "wasteHeat": 0, "season": "spring" },
+    { "companyId": "hydro-sunndal", "electricity": -200, "heat": 5, "wasteHeat": 155, "season": "summer" },
+    { "companyId": "sunndal-energi", "electricity": 0, "heat": 5, "wasteHeat": 0, "season": "summer" },
+    { "companyId": "ottem-recycling", "electricity": 0.5, "heat": 1, "wasteHeat": 0, "season": "summer" },
+    { "companyId": "storvik", "electricity": -0.3, "heat": 0.1, "wasteHeat": 0, "season": "summer" },
+    { "companyId": "industrikraft", "electricity": 200, "heat": 0, "wasteHeat": 0, "season": "summer" },
+    { "companyId": "sunndal-kommune", "electricity": -8, "heat": 5, "wasteHeat": 0, "season": "summer" },
+    { "companyId": "hydro-sunndal", "electricity": -380, "heat": -18, "wasteHeat": 135, "season": "autumn" },
+    { "companyId": "sunndal-energi", "electricity": 0, "heat": 10, "wasteHeat": 0, "season": "autumn" },
+    { "companyId": "ottem-recycling", "electricity": -0.8, "heat": -1, "wasteHeat": 0, "season": "autumn" },
+    { "companyId": "storvik", "electricity": -0.4, "heat": -0.3, "wasteHeat": 0, "season": "autumn" },
+    { "companyId": "industrikraft", "electricity": 120, "heat": 0, "wasteHeat": 0, "season": "autumn" },
+    { "companyId": "sunndal-kommune", "electricity": -20, "heat": -22, "wasteHeat": 0, "season": "autumn" }
+  ],
+  "energyOptimizations": [
+    {
+      "id": "eo-1",
+      "title": "Utvidet spillvarmeutnyttelse fra Hydro til fjernvarmenett",
+      "description": "Utvide eksisterende spillvarmeinfrastruktur fra Hydro Sunndal til fjernvarmenettet. I dag utnyttes 30,4 GWh, men potensialet er ytterligere 118 GWh som kan dekke mesteparten av kommunens og naeringsbyggenes varmebehov.",
+      "involvedCompanies": ["hydro-sunndal", "sunndal-kommune", "sunndal-energi"],
+      "savingGWh": 118,
+      "co2ReductionTonnes": 12000,
+      "confidence": 0.88,
+      "complexity": "medium",
+      "estimatedCostMNOK": 55,
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Utvidet spillvarmeutnyttelse", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "eo-2",
+      "title": "Optimalisert lastbalansering mellom industri og nett",
+      "description": "Implementere KI-styrt lastbalansering som optimaliserer stromforbruket hos Hydro basert pa spotpriser og nettkapasitet. Reduserer topplast og gir fleksibilitetsinntekter.",
+      "involvedCompanies": ["hydro-sunndal", "industrikraft"],
+      "savingGWh": 32,
+      "co2ReductionTonnes": 4200,
+      "confidence": 0.82,
+      "complexity": "high",
+      "estimatedCostMNOK": 12,
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "eo-3",
+      "title": "Biogassanlegg for organisk avfall",
+      "description": "Etablere lokalt biogassanlegg som konverterer organisk avfall fra kommunen og Ottem Recycling til biogass for oppvarming og transport.",
+      "involvedCompanies": ["sunndal-kommune", "ottem-recycling", "storvik"],
+      "savingGWh": 5.5,
+      "co2ReductionTonnes": 2800,
+      "confidence": 0.75,
+      "complexity": "high",
+      "estimatedCostMNOK": 45,
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biogass-case", "confidence": "projected" }
+    },
+    {
+      "id": "eo-4",
+      "title": "Varmeforsyning til Storvik verksted",
+      "description": "Koble Storvik AS til fjernvarmenettet for a erstatte elektrisk oppvarming av verkstedbygg med spillvarme. Reduserer str\u00f8mforbruk og utnytter overskuddsvarme fra Hydro.",
+      "involvedCompanies": ["storvik", "sunndal-energi"],
+      "savingGWh": 1.0,
+      "co2ReductionTonnes": 180,
+      "confidence": 0.91,
+      "complexity": "low",
+      "estimatedCostMNOK": 3,
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Storvik", "confidence": "estimated", "date": "2024" }
+    },
+    {
+      "id": "eo-5",
+      "title": "Solcelleanlegg pa industritak",
+      "description": "Utnytte store takflater pa industribygg og lagerhaller til solcelleanlegg. Kan supplere energiforsyningen i sommerhalvaret og redusere nettbelastning.",
+      "involvedCompanies": ["storvik", "ottem-recycling", "sunndal-kommune"],
+      "savingGWh": 8.2,
+      "co2ReductionTonnes": 1100,
+      "confidence": 0.85,
+      "complexity": "low",
+      "estimatedCostMNOK": 18,
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "eo-6",
+      "title": "Hydrogenproduksjon med overskuddskraft",
+      "description": "Bruke periodevise kraftoverskudd til a produsere gr\u00f8nn hydrogen via elektrolyse. Hydrogenet kan brukes i Hydros produksjonsprosesser eller selges til transport.",
+      "involvedCompanies": ["industrikraft", "hydro-sunndal"],
+      "savingGWh": 48,
+      "co2ReductionTonnes": 11200,
+      "confidence": 0.62,
+      "complexity": "high",
+      "estimatedCostMNOK": 120,
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Hydrogen-case", "confidence": "projected" }
+    }
+  ],
+  "materialFlows": [
+    {
+      "id": "mf-1",
+      "source": "hydro-sunndal",
+      "target": "ottem-recycling",
+      "material": "Aluminiumslagg",
+      "volumeTonnesPerYear": 4608,
+      "status": "existing",
+      "matchScore": 0.92,
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "page": "Tabell 3.1", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "mf-2",
+      "source": "hydro-sunndal",
+      "target": "ottem-recycling",
+      "material": "Brukt katodekarbonmateriale (SPL)",
+      "volumeTonnesPerYear": 2868,
+      "status": "existing",
+      "matchScore": 0.85,
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "page": "Tabell 3.2", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "mf-3",
+      "source": "hydro-sunndal",
+      "target": "storvik",
+      "material": "Aluminiumslagg til byggematerialer",
+      "volumeTonnesPerYear": 1800,
+      "status": "potential",
+      "matchScore": 0.78,
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "id": "mf-4",
+      "source": "sunndal-kommune",
+      "target": "ottem-recycling",
+      "material": "Kommunalt plastavfall",
+      "volumeTonnesPerYear": 850,
+      "status": "existing",
+      "matchScore": 0.88,
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "id": "mf-5",
+      "source": "sunndal-kommune",
+      "target": "ottem-recycling",
+      "material": "Organisk avfall",
+      "volumeTonnesPerYear": 1200,
+      "status": "existing",
+      "matchScore": 0.90,
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "id": "mf-6",
+      "source": "ottem-recycling",
+      "target": "storvik",
+      "material": "Resirkulert plast (granulat)",
+      "volumeTonnesPerYear": 320,
+      "status": "potential",
+      "matchScore": 0.72,
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "id": "mf-7",
+      "source": "sunndal-kommune",
+      "target": "ottem-recycling",
+      "material": "Trevirke og rivningsavfall",
+      "volumeTonnesPerYear": 650,
+      "status": "existing",
+      "matchScore": 0.82,
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "id": "mf-8",
+      "source": "ottem-recycling",
+      "target": "hydro-sunndal",
+      "material": "Resirkulert aluminium",
+      "volumeTonnesPerYear": 1500,
+      "status": "potential",
+      "matchScore": 0.94,
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Sirkulaer aluminiumskrets", "confidence": "projected" }
+    },
+    {
+      "id": "mf-9",
+      "source": "storvik",
+      "target": "ottem-recycling",
+      "material": "Verkstedavfall (metall og emballasje)",
+      "volumeTonnesPerYear": 203,
+      "status": "existing",
+      "matchScore": 0.75,
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Storvik", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "mf-10",
+      "source": "hydro-sunndal",
+      "target": "sunndal-kommune",
+      "material": "Rensemasser og filterstov",
+      "volumeTonnesPerYear": 3200,
+      "status": "existing",
+      "matchScore": 0.55,
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "estimated", "date": "2024" }
+    },
+    {
+      "id": "mf-11",
+      "source": "sunndal-kommune",
+      "target": "storvik",
+      "material": "Kompostert organisk materiale",
+      "volumeTonnesPerYear": 400,
+      "status": "potential",
+      "matchScore": 0.68,
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "id": "mf-12",
+      "source": "ottem-recycling",
+      "target": "sunndal-kommune",
+      "material": "Gjenvunnet metall til infrastruktur",
+      "volumeTonnesPerYear": 250,
+      "status": "potential",
+      "matchScore": 0.71,
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "id": "mf-13",
+      "source": "industrikraft",
+      "target": "ottem-recycling",
+      "material": "Elektronikkavfall (EE-avfall)",
+      "volumeTonnesPerYear": 8,
+      "status": "existing",
+      "matchScore": 0.80,
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "id": "mf-14",
+      "source": "hydro-sunndal",
+      "target": "ottem-recycling",
+      "material": "Brukte oljer og smormidler",
+      "volumeTonnesPerYear": 120,
+      "status": "existing",
+      "matchScore": 0.76,
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "mf-15",
+      "source": "ottem-recycling",
+      "target": "industrikraft",
+      "material": "Gjenvunnet kobber (kabelskrap)",
+      "volumeTonnesPerYear": 15,
+      "status": "potential",
+      "matchScore": 0.65,
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "id": "mf-16",
+      "source": "ottem-recycling",
+      "target": "hydro-sunndal",
+      "material": "Biokarbon (erstatter fossilt karbonmateriale)",
+      "volumeTonnesPerYear": 2185,
+      "status": "planned",
+      "matchScore": 0.88,
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biokarbon-case (AP4)", "confidence": "projected", "date": "2024" }
+    }
+  ],
+  "wasteStreams": [
+    {
+      "companyId": "hydro-sunndal",
+      "material": "Aluminiumslagg (saltslag)",
+      "classification": "EWC 10 03 21",
+      "volumeTonnesPerYear": 4608,
+      "currentHandling": "recycling",
+      "potentialReceivers": ["ottem-recycling", "storvik"],
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "companyId": "hydro-sunndal",
+      "material": "Brukt katodekarbonmateriale (SPL)",
+      "classification": "EWC 10 03 17*",
+      "volumeTonnesPerYear": 2868,
+      "currentHandling": "landfill",
+      "potentialReceivers": ["ottem-recycling"],
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "companyId": "hydro-sunndal",
+      "material": "Filterstov fra renseanlegg",
+      "classification": "EWC 10 03 19*",
+      "volumeTonnesPerYear": 3200,
+      "currentHandling": "landfill",
+      "potentialReceivers": ["sunndal-kommune"],
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "estimated", "date": "2024" }
+    },
+    {
+      "companyId": "sunndal-kommune",
+      "material": "Husholdningsavfall (restavfall)",
+      "classification": "EWC 20 03 01",
+      "volumeTonnesPerYear": 1200,
+      "currentHandling": "incineration",
+      "potentialReceivers": ["ottem-recycling"],
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "companyId": "sunndal-kommune",
+      "material": "Trevirke fra kommunale prosjekter",
+      "classification": "EWC 17 02 01",
+      "volumeTonnesPerYear": 650,
+      "currentHandling": "recycling",
+      "potentialReceivers": ["ottem-recycling", "hydro-sunndal"],
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "companyId": "sunndal-kommune",
+      "material": "Plastavfall (kildesortert)",
+      "classification": "EWC 20 01 39",
+      "volumeTonnesPerYear": 850,
+      "currentHandling": "recycling",
+      "potentialReceivers": ["ottem-recycling"],
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    },
+    {
+      "companyId": "ottem-recycling",
+      "material": "Restavfall fra sortering",
+      "classification": "EWC 19 12 12",
+      "volumeTonnesPerYear": 1600,
+      "currentHandling": "incineration",
+      "potentialReceivers": ["sunndal-kommune"],
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Ottem Recycling", "confidence": "estimated", "date": "2024" }
+    },
+    {
+      "companyId": "storvik",
+      "material": "Verkstedavfall (metall, olje, emballasje)",
+      "classification": "EWC 12/15",
+      "volumeTonnesPerYear": 244,
+      "currentHandling": "recycling",
+      "potentialReceivers": ["ottem-recycling"],
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Storvik", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "companyId": "hydro-sunndal",
+      "material": "Brukte oljer og smormidler",
+      "classification": "EWC 13 02 05*",
+      "volumeTonnesPerYear": 120,
+      "currentHandling": "incineration",
+      "potentialReceivers": ["ottem-recycling"],
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "companyId": "industrikraft",
+      "material": "Elektronikkavfall",
+      "classification": "EWC 16 02 13*",
+      "volumeTonnesPerYear": 8,
+      "currentHandling": "recycling",
+      "potentialReceivers": ["ottem-recycling"],
+      "provenance": { "source": "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", "confidence": "estimated" }
+    }
+  ],
+  "matchingMatrix": [
+    { "outputCompany": "hydro-sunndal", "inputCompany": "ottem-recycling", "material": "Aluminiumslagg", "compatibilityScore": 0.92, "volumePotential": 4608 },
+    { "outputCompany": "hydro-sunndal", "inputCompany": "storvik", "material": "Slagg til byggematerialer", "compatibilityScore": 0.78, "volumePotential": 1800 },
+    { "outputCompany": "hydro-sunndal", "inputCompany": "sunndal-kommune", "material": "Filterstov", "compatibilityScore": 0.55, "volumePotential": 3200 },
+    { "outputCompany": "hydro-sunndal", "inputCompany": "ottem-recycling", "material": "Brukte oljer", "compatibilityScore": 0.76, "volumePotential": 120 },
+    { "outputCompany": "sunndal-kommune", "inputCompany": "ottem-recycling", "material": "Plastavfall", "compatibilityScore": 0.88, "volumePotential": 850 },
+    { "outputCompany": "sunndal-kommune", "inputCompany": "ottem-recycling", "material": "Organisk avfall", "compatibilityScore": 0.90, "volumePotential": 1200 },
+    { "outputCompany": "sunndal-kommune", "inputCompany": "ottem-recycling", "material": "Trevirke", "compatibilityScore": 0.82, "volumePotential": 650 },
+    { "outputCompany": "sunndal-kommune", "inputCompany": "storvik", "material": "Kompost", "compatibilityScore": 0.68, "volumePotential": 400 },
+    { "outputCompany": "ottem-recycling", "inputCompany": "hydro-sunndal", "material": "Resirkulert aluminium", "compatibilityScore": 0.94, "volumePotential": 1500 },
+    { "outputCompany": "ottem-recycling", "inputCompany": "storvik", "material": "Resirkulert plast", "compatibilityScore": 0.72, "volumePotential": 320 },
+    { "outputCompany": "ottem-recycling", "inputCompany": "sunndal-kommune", "material": "Gjenvunnet metall", "compatibilityScore": 0.71, "volumePotential": 250 },
+    { "outputCompany": "ottem-recycling", "inputCompany": "industrikraft", "material": "Gjenvunnet kobber", "compatibilityScore": 0.65, "volumePotential": 15 },
+    { "outputCompany": "ottem-recycling", "inputCompany": "hydro-sunndal", "material": "Biokarbon", "compatibilityScore": 0.88, "volumePotential": 2185 },
+    { "outputCompany": "storvik", "inputCompany": "ottem-recycling", "material": "Verkstedavfall", "compatibilityScore": 0.75, "volumePotential": 203 },
+    { "outputCompany": "industrikraft", "inputCompany": "ottem-recycling", "material": "EE-avfall", "compatibilityScore": 0.80, "volumePotential": 8 },
+    { "outputCompany": "sunndal-energi", "inputCompany": "ottem-recycling", "material": "Transformer-olje", "compatibilityScore": 0.60, "volumePotential": 12 }
+  ],
+  "symbiosisOpportunities": [
+    {
+      "id": "sym-1",
+      "title": "Utvidet spillvarme fra Hydro til fjernvarme",
+      "description": "Utvide utnyttelsen av spillvarme fra aluminiumsproduksjonen hos Hydro Sunndal. I dag utnyttes 30,4 GWh via fjernvarmenettet. Totalt potensial er ytterligere 118 GWh som kan dekke mesteparten av kommunens og naeringsbyggenes varmebehov.",
+      "type": "energy",
+      "involvedCompanies": ["hydro-sunndal", "sunndal-kommune", "sunndal-energi"],
+      "aiConfidence": 0.92,
+      "dimensions": {
+        "economicPotential": 8,
+        "environmentalImpact": 9,
+        "technicalFeasibility": 7,
+        "regulatoryReadiness": 8,
+        "marketDemand": 9,
+        "implementationSpeed": 5
+      },
+      "risks": {
+        "technical": "medium",
+        "regulatory": "low",
+        "financial": "medium",
+        "operational": "low"
+      },
+      "estimatedAnnualValueMNOK": 18.5,
+      "co2ReductionTonnes": 12000,
+      "status": "validated",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Spillvarmeutnyttelse", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "sym-2",
+      "title": "Aluminiumslagg til byggematerialer",
+      "description": "Prosessere aluminiumslagg fra Hydro til bruk i byggematerialer som betong og asfalt. Slaggen kan erstatte jomfruelig tilslag og redusere behovet for steinbrudd i regionen.",
+      "type": "material",
+      "involvedCompanies": ["hydro-sunndal", "ottem-recycling", "storvik"],
+      "aiConfidence": 0.85,
+      "dimensions": {
+        "economicPotential": 7,
+        "environmentalImpact": 8,
+        "technicalFeasibility": 6,
+        "regulatoryReadiness": 5,
+        "marketDemand": 7,
+        "implementationSpeed": 4
+      },
+      "risks": {
+        "technical": "medium",
+        "regulatory": "high",
+        "financial": "medium",
+        "operational": "low"
+      },
+      "estimatedAnnualValueMNOK": 12.3,
+      "co2ReductionTonnes": 3200,
+      "status": "validated",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "estimated", "date": "2024" }
+    },
+    {
+      "id": "sym-3",
+      "title": "Biokarbonproduksjon fra trevirke",
+      "description": "Etablere pilotanlegg for produksjon av biokarbon fra lokalt trevirke og rivningsavfall (AP4 Biokarbon-case). Biokarbonen kan erstatte fossilt karbonmateriale i Hydros aluminiumsproduksjon og betydelig redusere CO2-avtrykket.",
+      "type": "material",
+      "involvedCompanies": ["ottem-recycling", "hydro-sunndal", "sunndal-kommune"],
+      "aiConfidence": 0.78,
+      "dimensions": {
+        "economicPotential": 9,
+        "environmentalImpact": 10,
+        "technicalFeasibility": 5,
+        "regulatoryReadiness": 6,
+        "marketDemand": 8,
+        "implementationSpeed": 3
+      },
+      "risks": {
+        "technical": "high",
+        "regulatory": "medium",
+        "financial": "high",
+        "operational": "medium"
+      },
+      "estimatedAnnualValueMNOK": 25.0,
+      "co2ReductionTonnes": 15000,
+      "status": "prioritized",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biokarbon-case (AP4)", "confidence": "projected", "date": "2024" }
+    },
+    {
+      "id": "sym-4",
+      "title": "Energioptimalisering med KI-styring",
+      "description": "Implementere KI-basert energistyring pa tvers av industriparken for a optimalisere kraftforbruk, redusere topplast og utnytte prisvariasjoner i kraftmarkedet. Systemet kan gi fleksibilitetsinntekter og redusert nettleie.",
+      "type": "service",
+      "involvedCompanies": ["industrikraft", "hydro-sunndal", "sunndal-energi"],
+      "aiConfidence": 0.88,
+      "dimensions": {
+        "economicPotential": 8,
+        "environmentalImpact": 6,
+        "technicalFeasibility": 8,
+        "regulatoryReadiness": 9,
+        "marketDemand": 7,
+        "implementationSpeed": 7
+      },
+      "risks": {
+        "technical": "low",
+        "regulatory": "low",
+        "financial": "low",
+        "operational": "medium"
+      },
+      "estimatedAnnualValueMNOK": 15.0,
+      "co2ReductionTonnes": 4200,
+      "status": "validated",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "sym-5",
+      "title": "Resirkulert plast til industrielle produkter",
+      "description": "Samle, sortere og granulere plastavfall fra kommunen og industrien for produksjon av industrielle plastprodukter lokalt. Kan skape nye arbeidsplasser og redusere plasttransport ut av regionen.",
+      "type": "material",
+      "involvedCompanies": ["ottem-recycling", "sunndal-kommune", "storvik"],
+      "aiConfidence": 0.72,
+      "dimensions": {
+        "economicPotential": 6,
+        "environmentalImpact": 7,
+        "technicalFeasibility": 7,
+        "regulatoryReadiness": 7,
+        "marketDemand": 5,
+        "implementationSpeed": 6
+      },
+      "risks": {
+        "technical": "medium",
+        "regulatory": "low",
+        "financial": "medium",
+        "operational": "medium"
+      },
+      "estimatedAnnualValueMNOK": 5.8,
+      "co2ReductionTonnes": 1800,
+      "status": "identified",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "id": "sym-6",
+      "title": "Organisk avfall til biogass",
+      "description": "Bygge biogassanlegg for konvertering av organisk avfall fra kommunen og naeringsmiddelvirksomhet til biogass. Gassen kan brukes til oppvarming i industriparken eller som drivstoff for kommunale kjoretoy.",
+      "type": "energy",
+      "involvedCompanies": ["sunndal-kommune", "ottem-recycling", "storvik"],
+      "aiConfidence": 0.75,
+      "dimensions": {
+        "economicPotential": 6,
+        "environmentalImpact": 8,
+        "technicalFeasibility": 7,
+        "regulatoryReadiness": 8,
+        "marketDemand": 6,
+        "implementationSpeed": 4
+      },
+      "risks": {
+        "technical": "medium",
+        "regulatory": "low",
+        "financial": "high",
+        "operational": "medium"
+      },
+      "estimatedAnnualValueMNOK": 8.2,
+      "co2ReductionTonnes": 2800,
+      "status": "identified",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biogass-case", "confidence": "projected" }
+    },
+    {
+      "id": "sym-7",
+      "title": "Delt logistikk- og transportinfrastruktur",
+      "description": "Etablere felles transportlosning for materialer og avfall mellom bedriftene i industriparken. Reduserer transportkostnader, utslipp og trafikkbelastning i Sunndal sentrum.",
+      "type": "infrastructure",
+      "involvedCompanies": ["storvik", "hydro-sunndal", "ottem-recycling", "sunndal-kommune"],
+      "aiConfidence": 0.82,
+      "dimensions": {
+        "economicPotential": 5,
+        "environmentalImpact": 5,
+        "technicalFeasibility": 9,
+        "regulatoryReadiness": 9,
+        "marketDemand": 6,
+        "implementationSpeed": 8
+      },
+      "risks": {
+        "technical": "low",
+        "regulatory": "low",
+        "financial": "low",
+        "operational": "low"
+      },
+      "estimatedAnnualValueMNOK": 3.5,
+      "co2ReductionTonnes": 950,
+      "status": "validated",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "sym-8",
+      "title": "Gr\u00f8nn hydrogenproduksjon med overskuddskraft",
+      "description": "Utnytte periodevise kraftoverskudd til hydrogenproduksjon via elektrolyse. Gr\u00f8nn hydrogen kan brukes som reduksjonsmiddel i aluminiumsproduksjon eller selges til transportsektor.",
+      "type": "energy",
+      "involvedCompanies": ["industrikraft", "hydro-sunndal", "sunndal-energi"],
+      "aiConfidence": 0.62,
+      "dimensions": {
+        "economicPotential": 9,
+        "environmentalImpact": 10,
+        "technicalFeasibility": 4,
+        "regulatoryReadiness": 5,
+        "marketDemand": 8,
+        "implementationSpeed": 2
+      },
+      "risks": {
+        "technical": "high",
+        "regulatory": "medium",
+        "financial": "high",
+        "operational": "high"
+      },
+      "estimatedAnnualValueMNOK": 35.0,
+      "co2ReductionTonnes": 11200,
+      "status": "identified",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Hydrogen-case", "confidence": "projected" }
+    },
+    {
+      "id": "sym-9",
+      "title": "Sirkulaer aluminiumskrets med lokalt skrap",
+      "description": "Etablere lukket kretslop for aluminium ved a samle og resirkulere lokalt aluminiumsskrap tilbake til Hydros smelteri. Reduserer energiforbruk med opptil 95% sammenlignet med primaerproduksjon.",
+      "type": "material",
+      "involvedCompanies": ["hydro-sunndal", "ottem-recycling"],
+      "aiConfidence": 0.90,
+      "dimensions": {
+        "economicPotential": 8,
+        "environmentalImpact": 9,
+        "technicalFeasibility": 8,
+        "regulatoryReadiness": 9,
+        "marketDemand": 9,
+        "implementationSpeed": 6
+      },
+      "risks": {
+        "technical": "low",
+        "regulatory": "low",
+        "financial": "low",
+        "operational": "medium"
+      },
+      "estimatedAnnualValueMNOK": 22.0,
+      "co2ReductionTonnes": 6800,
+      "status": "prioritized",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Sirkulaer aluminiumskrets", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "sym-10",
+      "title": "Felles dataplattform for industriell symbiose",
+      "description": "Utvikle digital plattform for sanntidsovervaking av material- og energistrommer mellom bedriftene. Muliggjor KI-analyse, prediktiv optimalisering og automatisert matching av restressurser.",
+      "type": "service",
+      "involvedCompanies": ["storvik", "hydro-sunndal", "sunndal-kommune", "ottem-recycling"],
+      "aiConfidence": 0.85,
+      "dimensions": {
+        "economicPotential": 7,
+        "environmentalImpact": 6,
+        "technicalFeasibility": 8,
+        "regulatoryReadiness": 9,
+        "marketDemand": 7,
+        "implementationSpeed": 7
+      },
+      "risks": {
+        "technical": "medium",
+        "regulatory": "low",
+        "financial": "low",
+        "operational": "medium"
+      },
+      "estimatedAnnualValueMNOK": 6.5,
+      "co2ReductionTonnes": 1500,
+      "status": "validated",
+      "provenance": { "source": "Soknad Skaparkraft Industrielle Loft", "confidence": "estimated", "date": "2023" }
+    },
+    {
+      "id": "sym-11",
+      "title": "Varmepumpelosning for lavtemperatur spillvarme",
+      "description": "Installere industrielle varmepumper for a oppgradere lavtemperatur spillvarme fra Hydro til nyttbar varme for naeringsbygg og kommunale formaal. Oker utnyttelsesgraden fra 30% til 85%.",
+      "type": "energy",
+      "involvedCompanies": ["hydro-sunndal", "storvik", "sunndal-energi"],
+      "aiConfidence": 0.80,
+      "dimensions": {
+        "economicPotential": 7,
+        "environmentalImpact": 7,
+        "technicalFeasibility": 8,
+        "regulatoryReadiness": 8,
+        "marketDemand": 7,
+        "implementationSpeed": 6
+      },
+      "risks": {
+        "technical": "low",
+        "regulatory": "low",
+        "financial": "medium",
+        "operational": "low"
+      },
+      "estimatedAnnualValueMNOK": 9.8,
+      "co2ReductionTonnes": 3800,
+      "status": "validated",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "sym-12",
+      "title": "Karbonfangst og -lagring (CCS) pilotprosjekt",
+      "description": "Pilotprosjekt for karbonfangst fra Hydros avgasser med lokal lagring eller utnyttelse. Kan fange opptil 50 000 tonn CO2 \u00e5rlig og posisjonere Sunndal som ledende innen gr\u00f8nn aluminiumsproduksjon.",
+      "type": "infrastructure",
+      "involvedCompanies": ["hydro-sunndal", "sunndal-energi", "industrikraft"],
+      "aiConfidence": 0.55,
+      "dimensions": {
+        "economicPotential": 8,
+        "environmentalImpact": 10,
+        "technicalFeasibility": 3,
+        "regulatoryReadiness": 4,
+        "marketDemand": 9,
+        "implementationSpeed": 1
+      },
+      "risks": {
+        "technical": "high",
+        "regulatory": "high",
+        "financial": "high",
+        "operational": "high"
+      },
+      "estimatedAnnualValueMNOK": 40.0,
+      "co2ReductionTonnes": 50000,
+      "status": "identified",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "CCS-case", "confidence": "projected" }
+    }
+  ],
+  "businessCases": [
+    {
+      "symbiosisId": "sym-1",
+      "title": "Spillvarme fra Hydro til fjernvarmenett",
+      "npvMNOK": 48.5,
+      "irr": 0.22,
+      "paybackYears": 3.5,
+      "investmentMNOK": 35,
+      "annualRevenueMNOK": 12.5,
+      "annualCostSavingMNOK": 6.0,
+      "timeline": [
+        {
+          "name": "Forstudie og prosjektering",
+          "startMonth": 0,
+          "durationMonths": 6,
+          "milestones": [
+            "Detaljert varmebehovsanalyse ferdigstilt",
+            "Trasealternativ for rorledning valgt",
+            "Konsesjonssoknad sendt"
+          ],
+          "status": "completed"
+        },
+        {
+          "name": "Detaljprosjektering",
+          "startMonth": 6,
+          "durationMonths": 8,
+          "milestones": [
+            "Teknisk design ferdigstilt",
+            "Leverandorer kontrahert",
+            "Byggetillatelse mottatt"
+          ],
+          "status": "in-progress"
+        },
+        {
+          "name": "Bygging og installasjon",
+          "startMonth": 14,
+          "durationMonths": 12,
+          "milestones": [
+            "Varmeveksler installert hos Hydro",
+            "Rorledning ferdigstilt",
+            "Tilkobling til fjernvarmenett"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Testing og igangkjoring",
+          "startMonth": 26,
+          "durationMonths": 3,
+          "milestones": [
+            "Funksjonstesting gjennomfort",
+            "Varmeleveranse verifisert",
+            "Overlevering til driftsorganisasjon"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Drift og optimalisering",
+          "startMonth": 29,
+          "durationMonths": 12,
+          "milestones": [
+            "Full driftskapasitet oppnadd",
+            "Forste ars driftsrapport levert"
+          ],
+          "status": "not-started"
+        }
+      ],
+      "fundingOpportunities": [
+        {
+          "name": "Enova - St\u00f8tte til fjernvarme",
+          "type": "grant",
+          "maxAmountMNOK": 15,
+          "relevanceScore": 0.92,
+          "deadline": "2026-09-15"
+        },
+        {
+          "name": "Klimasats - kommunale klimatiltak",
+          "type": "grant",
+          "maxAmountMNOK": 5,
+          "relevanceScore": 0.85,
+          "deadline": "2026-06-01"
+        },
+        {
+          "name": "Innovasjon Norge - Gr\u00f8nn industri",
+          "type": "loan",
+          "maxAmountMNOK": 20,
+          "relevanceScore": 0.78
+        }
+      ],
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Spillvarmeutnyttelse", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "symbiosisId": "sym-3",
+      "title": "Biokarbonproduksjon fra lokalt trevirke",
+      "npvMNOK": 32.8,
+      "irr": 0.18,
+      "paybackYears": 5.2,
+      "investmentMNOK": 65,
+      "annualRevenueMNOK": 18.0,
+      "annualCostSavingMNOK": 7.0,
+      "timeline": [
+        {
+          "name": "Teknologivalidering og forstudie",
+          "startMonth": 0,
+          "durationMonths": 9,
+          "milestones": [
+            "Teknologileverandor valgt",
+            "Ravareavtaler signert",
+            "Forstudierapport godkjent av styret"
+          ],
+          "status": "in-progress"
+        },
+        {
+          "name": "Pilotanlegg design og godkjenning",
+          "startMonth": 9,
+          "durationMonths": 10,
+          "milestones": [
+            "Detaljdesign ferdigstilt",
+            "Miljoutredning (MTA) godkjent",
+            "Finansiering sikret"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Bygging av pilotanlegg",
+          "startMonth": 19,
+          "durationMonths": 14,
+          "milestones": [
+            "Fundamenter og infrastruktur pa plass",
+            "Reaktor og prosessutstyr installert",
+            "Instrument og styringssystem operativt"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Igangkjoring og testkjoring",
+          "startMonth": 33,
+          "durationMonths": 6,
+          "milestones": [
+            "Forste biokarbon produsert",
+            "Kvalitetsgodkjenning fra Hydro",
+            "Stabil drift demonstrert"
+          ],
+          "status": "not-started"
+        }
+      ],
+      "fundingOpportunities": [
+        {
+          "name": "EU Horizon Europe - Green Deal",
+          "type": "grant",
+          "maxAmountMNOK": 25,
+          "relevanceScore": 0.88,
+          "deadline": "2026-11-30"
+        },
+        {
+          "name": "Enova - Innovative energi- og klimal\u00f8sninger",
+          "type": "grant",
+          "maxAmountMNOK": 20,
+          "relevanceScore": 0.90,
+          "deadline": "2026-09-15"
+        },
+        {
+          "name": "Innovasjon Norge - Risikol\u00e5n gr\u00f8nn industri",
+          "type": "loan",
+          "maxAmountMNOK": 30,
+          "relevanceScore": 0.82
+        }
+      ],
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biokarbon-case (AP4)", "confidence": "projected", "date": "2024" }
+    },
+    {
+      "symbiosisId": "sym-4",
+      "title": "KI-basert energioptimalisering pa tvers av industriparken",
+      "npvMNOK": 12.4,
+      "irr": 0.25,
+      "paybackYears": 2.1,
+      "investmentMNOK": 12,
+      "annualRevenueMNOK": 5.5,
+      "annualCostSavingMNOK": 9.5,
+      "timeline": [
+        {
+          "name": "Datainnsamling og integrasjon",
+          "startMonth": 0,
+          "durationMonths": 4,
+          "milestones": [
+            "API-integrasjon med alle energimalere",
+            "Historisk datavalidering fullfort",
+            "Sanntidsdatastrommer etablert"
+          ],
+          "status": "in-progress"
+        },
+        {
+          "name": "KI-modellutvikling",
+          "startMonth": 4,
+          "durationMonths": 6,
+          "milestones": [
+            "Prognosemodeller trent og validert",
+            "Optimaliseringsalgoritmer implementert",
+            "Backtesting mot historiske data vellykket"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Pilotdrift og verifisering",
+          "startMonth": 10,
+          "durationMonths": 4,
+          "milestones": [
+            "Pilot hos Hydro Sunndal igangsatt",
+            "Besparelser verifisert mot baseline",
+            "Beslutning om full utrulling"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Full utrulling",
+          "startMonth": 14,
+          "durationMonths": 6,
+          "milestones": [
+            "Alle bedrifter tilkoblet plattformen",
+            "Automatisert lastbalansering aktivert",
+            "Arlig evalueringsrapport levert"
+          ],
+          "status": "not-started"
+        }
+      ],
+      "fundingOpportunities": [
+        {
+          "name": "Innovasjon Norge - Digitalisering i industrien",
+          "type": "grant",
+          "maxAmountMNOK": 5,
+          "relevanceScore": 0.94,
+          "deadline": "2026-08-01"
+        },
+        {
+          "name": "Forskningsradet - ENERGIX",
+          "type": "grant",
+          "maxAmountMNOK": 8,
+          "relevanceScore": 0.86
+        }
+      ],
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "symbiosisId": "sym-9",
+      "title": "Sirkulaer aluminiumskrets med lokalt skrap",
+      "npvMNOK": 28.3,
+      "irr": 0.15,
+      "paybackYears": 4.8,
+      "investmentMNOK": 42,
+      "annualRevenueMNOK": 14.0,
+      "annualCostSavingMNOK": 8.0,
+      "timeline": [
+        {
+          "name": "Markedsanalyse og innsamlingssystem",
+          "startMonth": 0,
+          "durationMonths": 5,
+          "milestones": [
+            "Kartlegging av lokale skrapkilder ferdigstilt",
+            "Avtaler med leverandorer inngatt",
+            "Innsamlingslogistikk designet"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Oppgradering av sorteringsanlegg",
+          "startMonth": 5,
+          "durationMonths": 10,
+          "milestones": [
+            "Nytt sorteringsutstyr installert hos Ottem",
+            "Kvalitetskontrollsystem implementert",
+            "Proveforsyning til Hydro gjennomfort"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Integrasjon med Hydros smelteri",
+          "startMonth": 15,
+          "durationMonths": 8,
+          "milestones": [
+            "Inntakssystem for resirkulert aluminium installert",
+            "Legering og kvalitetstest bestatt",
+            "Produksjonskjoring med 30% resirkulert innsats"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Oppskalering og optimalisering",
+          "startMonth": 23,
+          "durationMonths": 12,
+          "milestones": [
+            "M\u00e5lsatt volum p\u00e5 1500 tonn/\u00e5r oppn\u00e5dd",
+            "Kostnadsreduksjon verifisert",
+            "Langsiktige leverandoravtaler pa plass"
+          ],
+          "status": "not-started"
+        },
+        {
+          "name": "Sertifisering og rapportering",
+          "startMonth": 35,
+          "durationMonths": 4,
+          "milestones": [
+            "ASI sertifisering oppnadd",
+            "Livssyklusanalyse (LCA) publisert"
+          ],
+          "status": "not-started"
+        }
+      ],
+      "fundingOpportunities": [
+        {
+          "name": "Enova - Sirkulaerokonomi i industri",
+          "type": "grant",
+          "maxAmountMNOK": 12,
+          "relevanceScore": 0.91,
+          "deadline": "2026-09-15"
+        },
+        {
+          "name": "EU Horizon Europe - Circular Economy",
+          "type": "grant",
+          "maxAmountMNOK": 18,
+          "relevanceScore": 0.84,
+          "deadline": "2027-02-28"
+        },
+        {
+          "name": "Klimasats - kommunale klimatiltak",
+          "type": "grant",
+          "maxAmountMNOK": 3,
+          "relevanceScore": 0.72,
+          "deadline": "2026-06-01"
+        }
+      ],
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Sirkulaer aluminiumskrets", "confidence": "verified", "date": "2024" }
+    }
+  ],
+  "dashboardKPIs": [
+    {
+      "id": "symbiosis",
+      "label": "Symbiosemuligheter",
+      "value": 47,
+      "unit": "",
+      "trend": "up",
+      "trendValue": 12,
+      "icon": "Network",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "energy-saving",
+      "label": "Energibesparingspotensial",
+      "value": 148.4,
+      "unit": "GWh",
+      "trend": "up",
+      "trendValue": 8.3,
+      "icon": "Zap",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Spillvarmepotensial", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "co2",
+      "label": "CO\u2082-reduksjon",
+      "value": 28500,
+      "unit": "tonn/\u00e5r",
+      "trend": "up",
+      "trendValue": 15.2,
+      "icon": "Leaf",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "confidence": "estimated", "date": "2024" }
+    },
+    {
+      "id": "material-reuse",
+      "label": "Materialutnyttelse",
+      "value": 73.2,
+      "unit": "%",
+      "trend": "up",
+      "trendValue": 5.1,
+      "icon": "Recycle",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyser (totalkart)", "confidence": "estimated", "date": "2024" }
+    }
+  ],
+  "workPackageStatuses": [
+    { "id": "AP1", "name": "Kompetanseheving", "status": "in-progress", "progress": 35 },
+    { "id": "AP2", "name": "Materialstr\u00f8m", "status": "in-progress", "progress": 60 },
+    { "id": "AP3", "name": "Energikartlegging", "status": "in-progress", "progress": 45 },
+    { "id": "AP4", "name": "Biokarbon", "status": "not-started", "progress": 0 },
+    { "id": "AP5", "name": "Nye symbioser", "status": "not-started", "progress": 0 },
+    { "id": "AP6", "name": "Markedstilgang", "status": "not-started", "progress": 0 }
+  ],
+  "aiInsights": [
+    {
+      "id": "ai-1",
+      "category": "energy",
+      "title": "Uutnyttet spillvarmepotensial identifisert",
+      "body": "Analyse av energidata viser at Hydro Sunndal genererer over 148 GWh spillvarme \u00e5rlig, hvorav kun 30,4 GWh utnyttes via fjernvarmenettet i dag. Ved \u00e5 utvide spillvarmeinfrastrukturen kan ytterligere 118 GWh utnyttes til oppvarming av kommunale bygg og n\u00e6ringseiendommer. Dette representerer en \u00e5rlig verdi p\u00e5 18.5 MNOK og en CO2-reduksjon p\u00e5 12 000 tonn.",
+      "confidence": 0.92,
+      "relatedCompanies": ["hydro-sunndal", "sunndal-kommune", "sunndal-energi"],
+      "priority": "high",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Spillvarmepotensial", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "ai-2",
+      "category": "material",
+      "title": "Sirkulaer aluminiumskrets kan redusere energiforbruk med 95%",
+      "body": "Maskinl\u00e6ringsmodellen har identifisert at lokalt aluminiumsskrap fra Ottem Recycling kan erstatte opptil 1 500 tonn prim\u00e6r aluminium \u00e5rlig hos Hydro. Resirkulering krever kun 5% av energien sammenlignet med prim\u00e6rproduksjon, noe som kan spare 28 GWh og redusere CO2-utslipp med 6 800 tonn per \u00e5r.",
+      "confidence": 0.90,
+      "relatedCompanies": ["hydro-sunndal", "ottem-recycling"],
+      "priority": "high",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Sirkulaer aluminiumskrets", "confidence": "verified", "date": "2024" }
+    },
+    {
+      "id": "ai-3",
+      "category": "symbiosis",
+      "title": "Biokarbonmulighet med hoy markedsverdi",
+      "body": "Analyse av trevirkestr\u00f8mmer fra kommunen og rivningsprosjekter viser tilstrekkelig volum for et pilotanlegg for biokarbonproduksjon (AP4). Biokarbon kan erstatte fossilt karbonmateriale i Hydros anodeproduksjon og har en estimert markedsverdi p\u00e5 25 MNOK \u00e5rlig. EU-regulering (CBAM) vil forsterke ettersp\u00f8rselen ytterligere.",
+      "confidence": 0.78,
+      "relatedCompanies": ["ottem-recycling", "hydro-sunndal", "sunndal-kommune"],
+      "priority": "high",
+      "provenance": { "source": "Avslutningsrapport Sirkulaere Sunndal", "page": "Biokarbon-case (AP4)", "confidence": "projected", "date": "2024" }
+    },
+    {
+      "id": "ai-4",
+      "category": "risk",
+      "title": "Kapasitetsrisiko i stromnettet identifisert",
+      "body": "Prediktiv analyse av nettbelastning indikerer at str\u00f8mnettet i Sunndal n\u00e6rmer seg kapasitetsgrensen i vinterperioden. Hydro Sunndal alene forbruker 6 143 GWh str\u00f8m \u00e5rlig. Uten tiltak kan nettbegrensninger oppst\u00e5 innen 2028, noe som kan p\u00e5virke industriens vekstmuligheter. KI-basert lastbalansering kan redusere topplastbehovet med opptil 15%.",
+      "confidence": 0.85,
+      "relatedCompanies": ["hydro-sunndal", "industrikraft"],
+      "priority": "high",
+      "provenance": { "source": "Mepex Materialstr\u00f8msanalyse \u2013 Hydro Sunndal", "confidence": "estimated", "date": "2024" }
+    },
+    {
+      "id": "ai-5",
+      "category": "opportunity",
+      "title": "Felles logistikkoptimalisering kan spare 3.5 MNOK \u00e5rlig",
+      "body": "Transportanalyse viser at bedriftene i industriparken samlet kj\u00f8rer over 12 000 transporter \u00e5rlig mellom anleggene. Ved \u00e5 koordinere transport og etablere en felles logistikkplattform kan antall turer reduseres med 40%, noe som gir en \u00e5rlig besparelse p\u00e5 3.5 MNOK og en CO2-reduksjon p\u00e5 950 tonn.",
+      "confidence": 0.82,
+      "relatedCompanies": ["storvik", "hydro-sunndal", "ottem-recycling"],
+      "priority": "medium",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "ai-6",
+      "category": "energy",
+      "title": "Solcellepotensial p\u00e5 industritak undervurdert",
+      "body": "Satellittanalyse av takflater i industriparken viser et uutnyttet solcellepotensial p\u00e5 over 8 GWh \u00e5rlig. De store, flate takene p\u00e5 Storviks verkstedbygg og kommunale lagerbygninger er s\u00e6rlig godt egnet. Sommeroverskudd kan brukes til hydrogenproduksjon eller lagres i batterier.",
+      "confidence": 0.85,
+      "relatedCompanies": ["storvik", "ottem-recycling", "sunndal-kommune"],
+      "priority": "medium",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "estimated" }
+    },
+    {
+      "id": "ai-7",
+      "category": "material",
+      "title": "Plastgranulat fra avfall kan dekke lokal ettersporsel",
+      "body": "Markedsanalyse viser at regionen importerer over 500 tonn plastgranulat \u00e5rlig til industrielle form\u00e5l. Ottem Recycling har kapasitet til \u00e5 produsere 320 tonn resirkulert granulat fra lokalt plastavfall, noe som kan dekke 64% av det lokale behovet og redusere transportutslipp betraktelig.",
+      "confidence": 0.72,
+      "relatedCompanies": ["ottem-recycling", "sunndal-kommune"],
+      "priority": "medium",
+      "provenance": { "source": "Helhetlige Industrielle Symbioser", "confidence": "projected" }
+    },
+    {
+      "id": "ai-8",
+      "category": "opportunity",
+      "title": "EU-finansieringsmuligheter for gr\u00f8nn hydrogen",
+      "body": "EU Horizon Europe har utlyst 200 MEURO til gr\u00f8nne hydrogenprosjekter i 2026-2027. Sunndals unike kombinasjon av overskuddskraft, aluminiumsindustri og lokale partnere gir en sterk s\u00f8knadsposisjon. KI-analysen estimerer en sannsynlighet p\u00e5 35% for \u00e5 motta st\u00f8tte p\u00e5 opptil 25 MNOK ved en koordinert s\u00f8knad fra industriparken.",
+      "confidence": 0.65,
+      "relatedCompanies": ["industrikraft", "hydro-sunndal", "sunndal-energi"],
+      "priority": "low",
+      "provenance": { "source": "Soknad Skaparkraft Industrielle Loft", "confidence": "projected", "date": "2023" }
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+name: Deploy API to Cloud Run
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'server/**'
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-west1
+  SERVICE: ora-ai-api
+  IMAGE: us-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ora-ai/api
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker us-west1-docker.pkg.dev --quiet
+
+      - name: Ensure Artifact Registry repository exists
+        continue-on-error: true
+        run: |
+          gcloud artifacts repositories describe ora-ai \
+            --location=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} 2>/dev/null || \
+          gcloud artifacts repositories create ora-ai \
+            --repository-format=docker \
+            --location=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} \
+            --description="ora-ai Docker images"
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ env.IMAGE }}:${{ github.sha }} -t ${{ env.IMAGE }}:latest -f server/Dockerfile server/
+          docker push ${{ env.IMAGE }}:${{ github.sha }}
+          docker push ${{ env.IMAGE }}:latest
+
+      - name: Seed demo data to GCS
+        run: |
+          echo "Checking if demo hub exists in GCS..."
+          if ! gsutil -q stat gs://gameasseets/ora-ai/hubs/demo.json 2>/dev/null; then
+            echo "Uploading demo hub..."
+            gsutil cp server/data/demo-hub.json gs://gameasseets/ora-ai/hubs/demo.json
+          else
+            echo "Demo hub already exists, skipping."
+          fi
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE }} \
+            --image=${{ env.IMAGE }}:${{ github.sha }} \
+            --region=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} \
+            --service-account=gh-cloudrun-deployer@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
+            --set-env-vars=GCS_BUCKET=gameasseets,GCS_PREFIX=ora-ai \
+            --port=8080 \
+            --cpu=1 \
+            --memory=512Mi \
+            --min-instances=0 \
+            --max-instances=3 \
+            --timeout=300 \
+            --concurrency=80 \
+            --allow-unauthenticated \
+            --platform=managed \
+            --quiet

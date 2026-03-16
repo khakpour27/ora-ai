@@ -1,0 +1,84 @@
+name: Deploy to Cloud Run
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-west1
+  SERVICE: ora-ai
+  IMAGE: us-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ora-ai/app
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker us-west1-docker.pkg.dev --quiet
+
+      - name: Ensure Artifact Registry repository exists
+        continue-on-error: true
+        run: |
+          gcloud artifacts repositories describe ora-ai \
+            --location=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} 2>/dev/null || \
+          gcloud artifacts repositories create ora-ai \
+            --repository-format=docker \
+            --location=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} \
+            --description="ora-ai Docker images"
+
+      - name: Build and push Docker image
+        run: |
+          docker build \
+            --build-arg VITE_GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
+            -t ${{ env.IMAGE }}:${{ github.sha }} \
+            -t ${{ env.IMAGE }}:latest .
+          docker push ${{ env.IMAGE }}:${{ github.sha }}
+          docker push ${{ env.IMAGE }}:latest
+
+      - name: Get API service URL
+        id: api-url
+        run: |
+          API_URL=$(gcloud run services describe ora-ai-api \
+            --region=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} \
+            --format='value(status.url)' 2>/dev/null || echo "")
+          echo "url=$API_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE }} \
+            --image=${{ env.IMAGE }}:${{ github.sha }} \
+            --region=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} \
+            --service-account=gh-cloudrun-deployer@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
+            --set-env-vars=VITE_GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},API_URL=${{ steps.api-url.outputs.url }} \
+            --port=80 \
+            --cpu=1 \
+            --memory=256Mi \
+            --min-instances=0 \
+            --max-instances=3 \
+            --timeout=300 \
+            --concurrency=80 \
+            --allow-unauthenticated \
+            --platform=managed \
+            --quiet
