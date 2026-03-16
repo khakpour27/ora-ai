@@ -49,7 +49,6 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build \
-            --build-arg VITE_GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
             -t ${{ env.IMAGE }}:${{ github.sha }} \
             -t ${{ env.IMAGE }}:latest .
           docker push ${{ env.IMAGE }}:${{ github.sha }}
@@ -71,7 +70,8 @@ jobs:
             --region=${{ env.REGION }} \
             --project=${{ env.PROJECT_ID }} \
             --service-account=gh-cloudrun-deployer@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
-            --set-env-vars=VITE_GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},API_URL=${{ steps.api-url.outputs.url }} \
+            --set-secrets=VITE_GEMINI_API_KEY=GEMINI_API_KEY:latest \
+            --set-env-vars=API_URL=${{ steps.api-url.outputs.url }} \
             --port=80 \
             --cpu=1 \
             --memory=256Mi \
