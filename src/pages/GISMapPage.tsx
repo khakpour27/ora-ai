@@ -55,16 +55,16 @@ const energyTypeLabels: Record<string, string> = {
 };
 
 // ---------------------------------------------------------------------------
-// Map view defaults (Sunndal industrial area)
+// Map view defaults (Øra industrial area, Fredrikstad)
 // ---------------------------------------------------------------------------
-const MAP_CENTER: [number, number] = [8.56, 62.67];
+const MAP_CENTER: [number, number] = [10.96, 59.187];
 const MAP_PITCH = 50;
-const MAP_BEARING = 12;
+const MAP_BEARING = -15;
 // Bounding box from company coordinates for adaptive zoom
 // SW corner (min lng, min lat) → NE corner (max lng, max lat)
 const MAP_BOUNDS: [[number, number], [number, number]] = [
-  [8.54, 62.66],
-  [8.58, 62.68],
+  [10.950, 59.180],
+  [10.975, 59.195],
 ];
 
 // ---------------------------------------------------------------------------
@@ -793,7 +793,7 @@ export default function GISMapPage() {
   return (
     <PageContainer
       title="Industriell symbiose-kartlegging"
-      description="Geografisk oversikt over energi- og materialstrømmer i Sunndal"
+      description="Geografisk oversikt over energi- og materialstrømmer på Øra"
     >
       <motion.div
         variants={staggerContainer}

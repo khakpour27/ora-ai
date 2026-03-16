@@ -75,7 +75,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 className="overflow-hidden whitespace-nowrap"
               >
                 <h1 className="text-sm font-semibold text-slate-100">
-                  Sirkulaere Sunndal
+                  SymbioLink Øra
                 </h1>
                 <p className="text-[10px] text-slate-500 leading-tight">
                   Hub KI

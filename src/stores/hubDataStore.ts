@@ -62,7 +62,7 @@ export const useHubDataStore = create<HubDataState>()(
         import("@/data").then((data) => {
           const mockHub: HubDataset = {
             id: "mock",
-            name: "Sirkulaere Sunndal Hub (Demo)",
+            name: "SymbioLink Øra",
             createdAt: "2024-01-01T00:00:00.000Z",
             updatedAt: new Date().toISOString(),
             companies: data.companies,

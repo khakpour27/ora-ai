@@ -323,8 +323,8 @@ export function SplashScreen({ isVisible, onComplete, onSkip }: SplashScreenProp
                   </h2>
                   <p className="text-slate-400 text-sm text-center max-w-md">
                     Verktøyet gir en interaktiv demonstrasjon av hvordan
-                    KI-basert analyse kan støtte alle arbeidspakker i Sirkulære
-                    Sunndal Hub.
+                    KI-basert analyse kan st\u00f8tte alle arbeidspakker i SymbioLink
+                    \u00d8ra.
                   </p>
 
                   <motion.button

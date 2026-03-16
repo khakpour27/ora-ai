@@ -44,7 +44,7 @@ export async function generatePDFReport(
 
   // ── Cover page ──
   y = 80;
-  addText(hub.name || "Sirkulaere Sunndal Hub", 24, [16, 185, 129], true);
+  addText(hub.name || "SymbioLink \u00d8ra", 24, [16, 185, 129], true);
   y += 5;
   addText("Prosjektrapport", 16, [148, 163, 184]);
   y += 5;
@@ -147,7 +147,7 @@ export async function generatePPTXReport(
   // ── Title Slide ──
   const titleSlide = pptx.addSlide();
   titleSlide.background = { color: bg };
-  titleSlide.addText(hub.name || "Sirkulaere Sunndal Hub", {
+  titleSlide.addText(hub.name || "SymbioLink \u00d8ra", {
     x: 0.5,
     y: 1.5,
     w: 9,

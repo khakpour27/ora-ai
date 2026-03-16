@@ -88,7 +88,7 @@ export default function EnergyFlowPage() {
   return (
     <PageContainer
       title="Energikartlegging"
-      description="Tverrindustriell energianalyse for Sunndal"
+      description="Tverrindustriell energianalyse for Øra"
     >
       <motion.div
         variants={staggerContainer}
@@ -150,7 +150,7 @@ function SankeyTab({
     <motion.div variants={chartReveal} initial="initial" animate="animate">
       <SectionHeader
         title="Energistrom"
-        description="Energiflyt mellom bedrifter og energikilder i Sunndal"
+        description="Energiflyt mellom bedrifter og energikilder på Øra"
         icon={<Workflow className="w-5 h-5 text-amber-400" />}
         action={<ChartExportMenu targetRef={sankeyRef} filename="energy-sankey" />}
       />

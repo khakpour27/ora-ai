@@ -1,268 +1,301 @@
 import type { EnergyFlow, EnergySurplusDeficit, EnergyOptimization } from "@/types";
 
-// Sankey diagram data - nodes and links for energy flow visualization
-// Restructured to reflect actual energy landscape: Sunndal Energi distributes fjernvarme (~45 GWh),
-// NOT electricity generation. Hydro gets electricity from the national grid.
+// Sankey diagram data — Øra industrial ecosystem energy flows
+// Primary data source: NORSUS OR.17.24 (2021 baseline)
 //
-// NOTE: Electricity values are visualization-scaled to keep the Sankey proportionate.
-// Hydro's actual electricity consumption is 6,143 GWh — using 1,800 GWh here so the
-// waste heat, district heating and biogas flows remain visible. Real values are in
-// company records (companies.ts) and text descriptions.
+// Architecture: Two waste-to-energy producers (FREVAR + SAREN) generate steam
+// that flows through intermediary nodes to industrial consumers and district heating.
+// Acyclic by design: producers → intermediaries → consumers → terminal nodes.
 export const sankeyNodes: { id: string; label: string; color: string }[] = [
-  // Companies
-  { id: "hydro-sunndal", label: "Hydro Sunndal", color: "#3B82F6" },
-  { id: "sunndal-energi", label: "Sunndal Energi", color: "#F59E0B" },
-  { id: "ottem-recycling", label: "Ottem Recycling", color: "#10B981" },
-  { id: "storvik", label: "Storvik", color: "#8B5CF6" },
-  { id: "industrikraft", label: "Industrikraft", color: "#EF4444" },
-  { id: "sunndal-kommune", label: "Sunndal kommune", color: "#06B6D4" },
+  // Energy producers
+  { id: "frevar-kf", label: "FREVAR KF", color: "#E84D2F" },
+  { id: "saren-energi", label: "SAREN Energi", color: "#D97706" },
   // Intermediary energy nodes
-  { id: "strøm", label: "Strøm", color: "#FBBF24" },
-  { id: "spillvarme", label: "Spillvarme", color: "#F97316" },
+  { id: "damp", label: "Damp (steam)", color: "#F97316" },
   { id: "fjernvarme", label: "Fjernvarme", color: "#EF4444" },
   { id: "biogass", label: "Biogass", color: "#22C55E" },
+  // Industrial consumers
+  { id: "kronos-titan", label: "Kronos Titan", color: "#4A7CB5" },
+  { id: "denofa", label: "Denofa", color: "#6B8E23" },
+  { id: "kemira-chemicals", label: "Kemira", color: "#0EA5A0" },
+  // District heating
+  { id: "fredrikstad-fjernvarme", label: "Fredrikstad Fjernvarme", color: "#DC2626" },
+  { id: "by-oppvarming", label: "By og husholdninger", color: "#F472B6" },
 ];
 
 export const energyFlows: EnergyFlow[] = [
-  // ── Existing electricity flows (vis-scaled; real Hydro = 6,143 GWh) ──
+  // ── Existing steam flows (NORSUS 2021 verified) ──
+
+  // FREVAR produces ~210 GWh steam; delivers ~190 GWh.
+  // Itemized deliveries to steam network: 89 + 62 + 5 + 2.9 = 158.9 GWh
   {
-    source: "industrikraft",
-    target: "strøm",
-    value: 500,
-    type: "electricity",
+    source: "frevar-kf",
+    target: "damp",
+    value: 158.9,
+    type: "heat",
     status: "existing",
-    provenance: { source: "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", confidence: "estimated" },
+    provenance: { source: "NORSUS OR.17.24 + frevar.no", confidence: "verified", date: "2021" },
   },
+  // SAREN delivers ~23 GWh steam to Denofa Energi hub (2021, pre-expansion)
   {
-    source: "strøm",
-    target: "hydro-sunndal",
-    value: 1800,
-    type: "electricity",
+    source: "saren-energi",
+    target: "damp",
+    value: 23,
+    type: "heat",
     status: "existing",
-    provenance: { source: "Mepex Materialstrømsanalyse – Hydro Sunndal", confidence: "verified", date: "2024" },
-  },
-  {
-    source: "strøm",
-    target: "sunndal-kommune",
-    value: 80,
-    type: "electricity",
-    status: "existing",
-    provenance: { source: "Konkurransegrunnlag Sirkulaere Sunndal Hub 2026", confidence: "estimated" },
-  },
-  {
-    source: "strøm",
-    target: "ottem-recycling",
-    value: 5,
-    type: "electricity",
-    status: "existing",
-    provenance: { source: "Mepex Materialstrømsanalyse – Ottem Recycling", confidence: "verified", date: "2024" },
-  },
-  {
-    source: "strøm",
-    target: "storvik",
-    value: 1.6,
-    type: "electricity",
-    status: "existing",
-    provenance: { source: "Mepex Materialstrømsanalyse – Storvik", confidence: "verified", date: "2024" },
+    provenance: { source: "NORSUS OR.17.24", confidence: "verified", date: "2021" },
   },
 
-  // ── Existing waste heat and district heating ──
+  // Steam → industrial consumers
   {
-    source: "hydro-sunndal",
-    target: "spillvarme",
-    value: 148.4,
-    type: "waste-heat",
+    source: "damp",
+    target: "kronos-titan",
+    value: 89,
+    type: "heat",
     status: "existing",
-    provenance: { source: "Avslutningsrapport Sirkulaere Sunndal", page: "Spillvarmepotensial", confidence: "verified", date: "2024" },
+    provenance: { source: "NORSUS OR.17.24", confidence: "verified", date: "2021" },
   },
   {
-    source: "spillvarme",
+    source: "damp",
+    target: "denofa",
+    value: 85,
+    type: "heat",
+    status: "existing",
+    provenance: { source: "NORSUS OR.17.24 (62 GWh FREVAR + 23 GWh SAREN)", confidence: "verified", date: "2021" },
+  },
+  {
+    source: "damp",
+    target: "biogass",
+    value: 5,
+    type: "heat",
+    status: "existing",
+    provenance: { source: "NORSUS OR.17.24", confidence: "verified", date: "2021" },
+  },
+  {
+    source: "damp",
+    target: "kemira-chemicals",
+    value: 2.9,
+    type: "heat",
+    status: "existing",
+    provenance: { source: "NORSUS OR.17.24 (inkl. Reichhold)", confidence: "verified", date: "2021" },
+  },
+
+  // ── District heating (hot water) ──
+
+  // FREVAR + SAREN → Fredrikstad Fjernvarme (~88 GWh combined)
+  // Split estimated: FREVAR ~55 GWh, SAREN ~33 GWh
+  {
+    source: "frevar-kf",
     target: "fjernvarme",
-    value: 30.4,
+    value: 55,
     type: "waste-heat",
     status: "existing",
-    provenance: { source: "Mepex Materialstrømsanalyse – Sunndal Energi", confidence: "verified", date: "2024" },
+    provenance: { source: "fredrikstad-fjernvarme.md (total 88 GWh, split estimated)", confidence: "estimated", date: "2021" },
+  },
+  {
+    source: "saren-energi",
+    target: "fjernvarme",
+    value: 33,
+    type: "waste-heat",
+    status: "existing",
+    provenance: { source: "fredrikstad-fjernvarme.md (total 88 GWh, split estimated)", confidence: "estimated", date: "2021" },
   },
   {
     source: "fjernvarme",
-    target: "sunndal-energi",
-    value: 30.4,
+    target: "fredrikstad-fjernvarme",
+    value: 88,
     type: "heat",
     status: "existing",
-    provenance: { source: "Mepex Materialstrømsanalyse – Sunndal Energi", confidence: "verified", date: "2024" },
+    provenance: { source: "fredrikstad-fjernvarme.md", confidence: "verified", date: "2024" },
   },
   {
-    source: "sunndal-energi",
-    target: "sunndal-kommune",
-    value: 25,
+    source: "fredrikstad-fjernvarme",
+    target: "by-oppvarming",
+    value: 88,
     type: "heat",
     status: "existing",
-    provenance: { source: "Mepex Materialstrømsanalyse – Sunndal Energi", confidence: "estimated" },
+    provenance: { source: "fredrikstad-fjernvarme.md (~3 000 husstander)", confidence: "verified", date: "2024" },
   },
 
   // ── Potential / planned flows ──
+
+  // SAREN post-expansion (Dec 2024): capacity nearly doubled to 37 MW / 105,000 t/yr
+  // Additional steam available for industrial use
   {
-    source: "spillvarme",
-    target: "fjernvarme",
-    value: 118,
-    type: "waste-heat",
-    status: "potential",
-    provenance: { source: "Avslutningsrapport Sirkulaere Sunndal", page: "Utvidet spillvarmeutnyttelse", confidence: "projected", date: "2024" },
-  },
-  {
-    source: "fjernvarme",
-    target: "storvik",
-    value: 1,
+    source: "saren-energi",
+    target: "damp",
+    value: 50,
     type: "heat",
     status: "potential",
-    provenance: { source: "Helhetlige Industrielle Symbioser", confidence: "projected" },
+    provenance: { source: "sarenenergy.com (kapasitet doblet des. 2024)", confidence: "projected", date: "2024" },
   },
+  // Kronos Titan can absorb more steam, displacing LNG/oil (~150 GWh fossil)
   {
-    source: "fjernvarme",
-    target: "ottem-recycling",
-    value: 2,
+    source: "damp",
+    target: "kronos-titan",
+    value: 40,
     type: "heat",
     status: "potential",
-    provenance: { source: "Helhetlige Industrielle Symbioser", confidence: "projected" },
+    provenance: { source: "kronos-titan.md (erstatter ~150 GWh LNG/olje)", confidence: "projected" },
   },
+  // Fjernvarme expansion: proposed 160 GWh production (from current 88)
   {
-    source: "sunndal-kommune",
-    target: "biogass",
-    value: 3.5,
-    type: "biogas",
-    status: "potential",
-    provenance: { source: "Avslutningsrapport Sirkulaere Sunndal", page: "Biogass-case", confidence: "projected" },
+    source: "fjernvarme",
+    target: "fredrikstad-fjernvarme",
+    value: 72,
+    type: "heat",
+    status: "planned",
+    provenance: { source: "fredrikstad-fjernvarme.md (NVE-konsesjon 160 GWh)", confidence: "projected", date: "2024" },
   },
-  {
-    source: "ottem-recycling",
-    target: "biogass",
-    value: 2.0,
-    type: "biogas",
-    status: "potential",
-    provenance: { source: "Avslutningsrapport Sirkulaere Sunndal", page: "Biogass-case", confidence: "projected" },
-  },
-  // biogass → storvik: terminal node (preserves Sankey acyclicity)
+  // Biogas expansion — regional potential 100 GWh
   {
     source: "biogass",
-    target: "storvik",
-    value: 1.5,
+    target: "by-oppvarming",
+    value: 10,
     type: "biogas",
-    status: "planned",
-    provenance: { source: "Helhetlige Industrielle Symbioser", confidence: "projected" },
+    status: "potential",
+    provenance: { source: "norsus-biogas-potential-nedre-glomma.md (100 GWh regionalt)", confidence: "projected" },
   },
 ];
 
+// Seasonal energy surplus/deficit per company (estimated — no seasonal data in sources).
+// Positive = surplus/production, Negative = deficit/consumption.
+// Based on process characteristics: industrial processes ~constant, district heating seasonal.
 export const surplusDeficitData: EnergySurplusDeficit[] = [
-  // Winter
-  { companyId: "hydro-sunndal", electricity: -450, heat: -30, wasteHeat: 130, season: "winter" },
-  { companyId: "sunndal-energi", electricity: 0, heat: 12, wasteHeat: 0, season: "winter" },
-  { companyId: "ottem-recycling", electricity: -1, heat: -2, wasteHeat: 0, season: "winter" },
-  { companyId: "storvik", electricity: -0.5, heat: -0.4, wasteHeat: 0, season: "winter" },
-  { companyId: "industrikraft", electricity: 80, heat: 0, wasteHeat: 0, season: "winter" },
-  { companyId: "sunndal-kommune", electricity: -25, heat: -35, wasteHeat: 0, season: "winter" },
+  // ── Winter (high heating demand) ──
+  { companyId: "frevar-kf", electricity: -8, heat: 55, wasteHeat: 0, season: "winter" },
+  { companyId: "kronos-titan", electricity: -8, heat: -85, wasteHeat: 0, season: "winter" },
+  { companyId: "kemira-chemicals", electricity: -1, heat: -1, wasteHeat: 0, season: "winter" },
+  { companyId: "denofa", electricity: -5, heat: -28, wasteHeat: 0, season: "winter" },
+  { companyId: "batteriretur", electricity: -2, heat: -0.5, wasteHeat: 0, season: "winter" },
+  { companyId: "metallco-stene", electricity: -0.8, heat: -0.2, wasteHeat: 0, season: "winter" },
+  { companyId: "saren-energi", electricity: -1, heat: 80, wasteHeat: 0, season: "winter" },
+  { companyId: "metallco-kabel", electricity: -1, heat: -0.3, wasteHeat: 0, season: "winter" },
+  { companyId: "stene-stal", electricity: -1.2, heat: -0.3, wasteHeat: 0, season: "winter" },
+  { companyId: "ng-metall", electricity: -4, heat: -0.5, wasteHeat: 0, season: "winter" },
+  { companyId: "fredrikstad-fjernvarme", electricity: -0.2, heat: 30, wasteHeat: 0, season: "winter" },
+  { companyId: "borg-havn", electricity: -0.8, heat: -0.1, wasteHeat: 0, season: "winter" },
 
-  // Spring
-  { companyId: "hydro-sunndal", electricity: -300, heat: -10, wasteHeat: 140, season: "spring" },
-  { companyId: "sunndal-energi", electricity: 0, heat: 8, wasteHeat: 0, season: "spring" },
-  { companyId: "ottem-recycling", electricity: -0.5, heat: -0.5, wasteHeat: 0, season: "spring" },
-  { companyId: "storvik", electricity: -0.4, heat: -0.2, wasteHeat: 0, season: "spring" },
-  { companyId: "industrikraft", electricity: 150, heat: 0, wasteHeat: 0, season: "spring" },
-  { companyId: "sunndal-kommune", electricity: -15, heat: -12, wasteHeat: 0, season: "spring" },
+  // ── Spring (moderate heating demand) ──
+  { companyId: "frevar-kf", electricity: -8, heat: 52, wasteHeat: 0, season: "spring" },
+  { companyId: "kronos-titan", electricity: -7.5, heat: -80, wasteHeat: 0, season: "spring" },
+  { companyId: "kemira-chemicals", electricity: -1, heat: -0.8, wasteHeat: 0, season: "spring" },
+  { companyId: "denofa", electricity: -5, heat: -25, wasteHeat: 0, season: "spring" },
+  { companyId: "batteriretur", electricity: -2, heat: -0.3, wasteHeat: 0, season: "spring" },
+  { companyId: "metallco-stene", electricity: -0.8, heat: -0.1, wasteHeat: 0, season: "spring" },
+  { companyId: "saren-energi", electricity: -1, heat: 75, wasteHeat: 0, season: "spring" },
+  { companyId: "metallco-kabel", electricity: -1, heat: -0.2, wasteHeat: 0, season: "spring" },
+  { companyId: "stene-stal", electricity: -1.2, heat: -0.2, wasteHeat: 0, season: "spring" },
+  { companyId: "ng-metall", electricity: -3.8, heat: -0.3, wasteHeat: 0, season: "spring" },
+  { companyId: "fredrikstad-fjernvarme", electricity: -0.2, heat: 22, wasteHeat: 0, season: "spring" },
+  { companyId: "borg-havn", electricity: -0.8, heat: 0, wasteHeat: 0, season: "spring" },
 
-  // Summer
-  { companyId: "hydro-sunndal", electricity: -200, heat: 5, wasteHeat: 155, season: "summer" },
-  { companyId: "sunndal-energi", electricity: 0, heat: 5, wasteHeat: 0, season: "summer" },
-  { companyId: "ottem-recycling", electricity: 0.5, heat: 1, wasteHeat: 0, season: "summer" },
-  { companyId: "storvik", electricity: -0.3, heat: 0.1, wasteHeat: 0, season: "summer" },
-  { companyId: "industrikraft", electricity: 200, heat: 0, wasteHeat: 0, season: "summer" },
-  { companyId: "sunndal-kommune", electricity: -8, heat: 5, wasteHeat: 0, season: "summer" },
+  // ── Summer (low heating demand, cooling needed) ──
+  { companyId: "frevar-kf", electricity: -8, heat: 48, wasteHeat: 0, season: "summer" },
+  { companyId: "kronos-titan", electricity: -7, heat: -78, wasteHeat: 0, season: "summer" },
+  { companyId: "kemira-chemicals", electricity: -1, heat: -0.5, wasteHeat: 0, season: "summer" },
+  { companyId: "denofa", electricity: -5, heat: -22, wasteHeat: 0, season: "summer" },
+  { companyId: "batteriretur", electricity: -2, heat: 0, wasteHeat: 0, season: "summer" },
+  { companyId: "metallco-stene", electricity: -0.7, heat: 0, wasteHeat: 0, season: "summer" },
+  { companyId: "saren-energi", electricity: -1, heat: 70, wasteHeat: 0, season: "summer" },
+  { companyId: "metallco-kabel", electricity: -1, heat: 0, wasteHeat: 0, season: "summer" },
+  { companyId: "stene-stal", electricity: -1.2, heat: 0, wasteHeat: 0, season: "summer" },
+  { companyId: "ng-metall", electricity: -3.5, heat: 0, wasteHeat: 0, season: "summer" },
+  { companyId: "fredrikstad-fjernvarme", electricity: -0.2, heat: 10, wasteHeat: 0, season: "summer" },
+  { companyId: "borg-havn", electricity: -0.7, heat: 0, wasteHeat: 0, season: "summer" },
 
-  // Autumn
-  { companyId: "hydro-sunndal", electricity: -380, heat: -18, wasteHeat: 135, season: "autumn" },
-  { companyId: "sunndal-energi", electricity: 0, heat: 10, wasteHeat: 0, season: "autumn" },
-  { companyId: "ottem-recycling", electricity: -0.8, heat: -1, wasteHeat: 0, season: "autumn" },
-  { companyId: "storvik", electricity: -0.4, heat: -0.3, wasteHeat: 0, season: "autumn" },
-  { companyId: "industrikraft", electricity: 120, heat: 0, wasteHeat: 0, season: "autumn" },
-  { companyId: "sunndal-kommune", electricity: -20, heat: -22, wasteHeat: 0, season: "autumn" },
+  // ── Autumn (increasing heating demand) ──
+  { companyId: "frevar-kf", electricity: -8, heat: 53, wasteHeat: 0, season: "autumn" },
+  { companyId: "kronos-titan", electricity: -7.5, heat: -82, wasteHeat: 0, season: "autumn" },
+  { companyId: "kemira-chemicals", electricity: -1, heat: -0.7, wasteHeat: 0, season: "autumn" },
+  { companyId: "denofa", electricity: -5, heat: -26, wasteHeat: 0, season: "autumn" },
+  { companyId: "batteriretur", electricity: -2, heat: -0.3, wasteHeat: 0, season: "autumn" },
+  { companyId: "metallco-stene", electricity: -0.8, heat: -0.1, wasteHeat: 0, season: "autumn" },
+  { companyId: "saren-energi", electricity: -1, heat: 76, wasteHeat: 0, season: "autumn" },
+  { companyId: "metallco-kabel", electricity: -1, heat: -0.2, wasteHeat: 0, season: "autumn" },
+  { companyId: "stene-stal", electricity: -1.2, heat: -0.2, wasteHeat: 0, season: "autumn" },
+  { companyId: "ng-metall", electricity: -3.8, heat: -0.3, wasteHeat: 0, season: "autumn" },
+  { companyId: "fredrikstad-fjernvarme", electricity: -0.2, heat: 25, wasteHeat: 0, season: "autumn" },
+  { companyId: "borg-havn", electricity: -0.8, heat: -0.1, wasteHeat: 0, season: "autumn" },
 ];
 
 export const energyOptimizations: EnergyOptimization[] = [
   {
     id: "eo-1",
-    title: "Utvidet spillvarmeutnyttelse fra Hydro til fjernvarmenett",
+    title: "Kronos Titan full elektrifisering",
     description:
-      "Utvide eksisterende spillvarmeinfrastruktur fra Hydro Sunndal til fjernvarmenettet. I dag utnyttes 30,4 GWh, men potensialet er ytterligere 118 GWh som kan dekke mesteparten av kommunens og naeringsbyggenes varmebehov.",
-    involvedCompanies: ["hydro-sunndal", "sunndal-kommune", "sunndal-energi"],
-    savingGWh: 118,
-    co2ReductionTonnes: 12000,
-    confidence: 0.88,
-    complexity: "medium",
-    estimatedCostMNOK: 55,
-    provenance: { source: "Avslutningsrapport Sirkulaere Sunndal", page: "Utvidet spillvarmeutnyttelse", confidence: "verified", date: "2024" },
+      "Erstatte ~150 GWh olje/LNG med elektrisitet i Kronos Titans TiO₂-produksjon. Krever betydelig oppgradering av regionalt strømnett. Blokkert av nettkapasitet — tidligst etter 2030.",
+    involvedCompanies: ["kronos-titan"],
+    savingGWh: 150,
+    co2ReductionTonnes: 35000,
+    confidence: 0.65,
+    complexity: "high",
+    estimatedCostMNOK: 200,
+    provenance: { source: "kronos-titan.md + NORSUS OR.17.24", confidence: "projected" },
   },
   {
     id: "eo-2",
-    title: "Optimalisert lastbalansering mellom industri og nett",
+    title: "SAREN kapasitetsutvidelse — økt dampforsyning",
     description:
-      "Implementere KI-styrt lastbalansering som optimaliserer stromforbruket hos Hydro basert pa spotpriser og nettkapasitet. Reduserer topplast og gir fleksibilitetsinntekter.",
-    involvedCompanies: ["hydro-sunndal", "industrikraft"],
-    savingGWh: 32,
-    co2ReductionTonnes: 4200,
-    confidence: 0.82,
-    complexity: "high",
-    estimatedCostMNOK: 12,
-    provenance: { source: "Helhetlige Industrielle Symbioser", confidence: "estimated" },
+      "SAREN BIO-ELs tredje forbrenningslinje (des. 2024) dobler nesten kapasiteten til 37 MW / 105 000 tonn/år. Ekstra damp kan erstatte fossilt brennstoff hos Kronos Titan og utvide fjernvarmenettet.",
+    involvedCompanies: ["saren-energi", "kronos-titan", "fredrikstad-fjernvarme"],
+    savingGWh: 90,
+    co2ReductionTonnes: 22000,
+    confidence: 0.85,
+    complexity: "medium",
+    estimatedCostMNOK: 0,
+    provenance: { source: "sarenenergy.com + ncce.no", confidence: "verified", date: "2024" },
   },
   {
     id: "eo-3",
-    title: "Biogassanlegg for organisk avfall",
+    title: "Utvidet fjernvarmenett — 160 GWh",
     description:
-      "Etablere lokalt biogassanlegg som konverterer organisk avfall fra kommunen og Ottem Recycling til biogass for oppvarming og transport.",
-    involvedCompanies: ["sunndal-kommune", "ottem-recycling", "storvik"],
-    savingGWh: 5.5,
-    co2ReductionTonnes: 2800,
-    confidence: 0.75,
-    complexity: "high",
-    estimatedCostMNOK: 45,
-    provenance: { source: "Avslutningsrapport Sirkulaere Sunndal", page: "Biogass-case", confidence: "projected" },
+      "Fredrikstad Fjernvarme har NVE-konsesjon for utvidelse til 160 GWh produksjon og 100 MW effekt. Vil dekke flere bydeler og erstatte fossile oppvarmingsløsninger i Fredrikstad.",
+    involvedCompanies: ["fredrikstad-fjernvarme", "frevar-kf", "saren-energi"],
+    savingGWh: 72,
+    co2ReductionTonnes: 18000,
+    confidence: 0.78,
+    complexity: "medium",
+    estimatedCostMNOK: 85,
+    provenance: { source: "fredrikstad-fjernvarme.md (NVE-konsesjon)", confidence: "verified", date: "2024" },
   },
   {
     id: "eo-4",
-    title: "Varmeforsyning til Storvik verksted",
+    title: "Regional biogassutvidelse — 100 GWh",
     description:
-      "Koble Storvik AS til fjernvarmenettet for a erstatte elektrisk oppvarming av verkstedbygg med spillvarme. Reduserer strømforbruk og utnytter overskuddsvarme fra Hydro.",
-    involvedCompanies: ["storvik", "sunndal-energi"],
-    savingGWh: 1.0,
-    co2ReductionTonnes: 180,
-    confidence: 0.91,
-    complexity: "low",
-    estimatedCostMNOK: 3,
-    provenance: { source: "Mepex Materialstrømsanalyse – Storvik", confidence: "estimated", date: "2024" },
+      "FREVARs biogassanlegg har potensial for betydelig kapasitetsøkning. Regionalt potensial i Nedre Glomma er beregnet til 100 GWh, med 30 % av husdyrgjødsel gjennom biogassanlegg innen 2030.",
+    involvedCompanies: ["frevar-kf"],
+    savingGWh: 75,
+    co2ReductionTonnes: 11400,
+    confidence: 0.72,
+    complexity: "high",
+    estimatedCostMNOK: 120,
+    provenance: { source: "norsus-biogas-potential-nedre-glomma.md", confidence: "projected" },
   },
   {
     id: "eo-5",
-    title: "Solcelleanlegg pa industritak",
+    title: "Borg CO₂ CCS-klynge",
     description:
-      "Utnytte store takflater pa industribygg og lagerhaller til solcelleanlegg. Kan supplere energiforsyningen i sommerhalvaret og redusere nettbelastning.",
-    involvedCompanies: ["storvik", "ottem-recycling", "sunndal-kommune"],
-    savingGWh: 8.2,
-    co2ReductionTonnes: 1100,
-    confidence: 0.85,
-    complexity: "low",
-    estimatedCostMNOK: 18,
-    provenance: { source: "Helhetlige Industrielle Symbioser", confidence: "estimated" },
+      "Karbonfangst fra tre Øra-lokasjoner med potensial for ~630 000 tonn CO₂/år. CO₂ mellomlagres ved Fredrikstad havn og skippes til Øygarden for permanent lagring under havbunnen i Nordsjøen. 18 samarbeidspartnere.",
+    involvedCompanies: ["frevar-kf", "saren-energi", "borg-havn"],
+    savingGWh: 0,
+    co2ReductionTonnes: 630000,
+    confidence: 0.58,
+    complexity: "high",
+    estimatedCostMNOK: 800,
+    provenance: { source: "ncce-borg-co2-ccs-ora.md + norsus-ccs-cluster-ora.md", confidence: "projected" },
   },
   {
     id: "eo-6",
-    title: "Hydrogenproduksjon med overskuddskraft",
+    title: "Denofa elektrodekjel — full kapasitet",
     description:
-      "Bruke periodevise kraftoverskudd til a produsere grønn hydrogen via elektrolyse. Hydrogenet kan brukes i Hydros produksjonsprosesser eller selges til transport.",
-    involvedCompanies: ["industrikraft", "hydro-sunndal"],
-    savingGWh: 48,
-    co2ReductionTonnes: 11200,
-    confidence: 0.62,
-    complexity: "high",
-    estimatedCostMNOK: 120,
-    provenance: { source: "Avslutningsrapport Sirkulaere Sunndal", page: "Hydrogen-case", confidence: "projected" },
+      "Denofas elektrodekjel kan erstatte LNG-reservekjelen, men begrenses av utilstrekkelig regionalt strømnett. Full utnyttelse krever nettoppgradering — samme flaskehals som Kronos Titan-elektrifisering.",
+    involvedCompanies: ["denofa"],
+    savingGWh: 45,
+    co2ReductionTonnes: 10500,
+    confidence: 0.60,
+    complexity: "medium",
+    estimatedCostMNOK: 15,
+    provenance: { source: "denofa.md", confidence: "estimated", date: "2024" },
   },
 ];

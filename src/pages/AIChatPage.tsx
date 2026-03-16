@@ -70,17 +70,11 @@ interface ParsedSource {
 }
 
 function getShortSourceName(source: string): string {
-  if (source.includes("Mepex")) {
-    const after = source.match(/[–-]\s*(.+)/)?.[1];
-    if (after) return `Mepex–${after.split(/\s+/)[0]}`;
-    return "Mepex";
-  }
-  if (source.includes("Avslutningsrapport")) return "Avslutningsrapp.";
-  if (source.includes("Konkurransegrunnlag")) return "Konkurransegrunn.";
-  if (source.toLowerCase().includes("søknad") || source.toLowerCase().includes("soknad"))
-    return "Søkn. Skaparkraft";
-  if (source.includes("SUNS")) return "SUNS nettsted";
-  if (source.includes("Helhetlige")) return "Helhetlige Symb.";
+  if (source.includes("NORSUS")) return "NORSUS";
+  if (source.includes("NCCE")) return "NCCE/SymbioLink";
+  if (source.includes("Sirkulærhovedstaden") || source.includes("sirkulaerhovedstaden")) return "Sirk.hovedstaden";
+  if (source.includes("SymbioLink")) return "SymbioLink Øra";
+  if (source.includes("Vekst i Fredrikstad")) return "Vekst Fredrikstad";
   return source.split(/\s+/).slice(0, 2).join(" ");
 }
 
@@ -160,7 +154,7 @@ const suggestedQuestions: SuggestedQuestion[] = [
     icon: Zap,
     label: "Energi",
     question:
-      "Hva er det totale spillvarmepotensialet fra Hydro Sunndal, og hvor mye utnyttes i dag?",
+      "Hvor mye damp leverer FREVAR til industribedriftene p\u00e5 \u00d8ra, og hva er utvidelsespotensialet?",
     color: "text-amber-400",
   },
   {
@@ -188,14 +182,14 @@ const suggestedQuestions: SuggestedQuestion[] = [
     icon: Lightbulb,
     label: "Strategi",
     question:
-      "Hva bør være førsteprioriteten for Sirkulære Sunndal Hub det neste året?",
+      "Hva b\u00f8r v\u00e6re f\u00f8rsteprioriteten for SymbioLink \u00d8ra det neste \u00e5ret?",
     color: "text-rose-400",
   },
   {
     icon: Sparkles,
-    label: "Biokarbon",
+    label: "CCS",
     question:
-      "Forklar biokarboncasen (AP4) og dens potensial for CO2-reduksjon hos Hydro.",
+      "Forklar CCS-klyngen og dens potensial for CO\u2082-reduksjon p\u00e5 \u00d8ra.",
     color: "text-teal-400",
   },
 ];
@@ -994,7 +988,7 @@ export default function AIChatPage() {
                     Hei! Jeg er din KI-ekspert.
                   </h2>
                   <p className="text-sm text-slate-400 max-w-md">
-                    Jeg har tilgang til all prosjektdata for Sirkulaere Sunndal
+                    Jeg har tilgang til all prosjektdata for SymbioLink \u00d8ra
                     Hub. Still meg spørsmål om energi, materialstrommer,
                     symbiosemuligheter eller forretningscaser.
                   </p>

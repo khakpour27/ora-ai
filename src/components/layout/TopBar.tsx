@@ -21,7 +21,7 @@ export function TopBar() {
     <header className="flex items-center justify-between h-14 px-6 border-b border-slate-700/50 glass-card rounded-none border-x-0 border-t-0">
       {/* Left: Breadcrumb */}
       <div className="flex items-center gap-2 text-sm">
-        <span className="text-slate-500">Sirkulaere Sunndal</span>
+        <span className="text-slate-500">SymbioLink Øra</span>
         <span className="text-slate-600">/</span>
         <span className="text-slate-100 font-medium">{currentPage}</span>
       </div>

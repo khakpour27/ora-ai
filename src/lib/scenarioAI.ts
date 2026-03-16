@@ -10,14 +10,14 @@ import type { ScenarioMutation } from "@/lib/api";
 // Suggested goals
 // ---------------------------------------------------------------------------
 export const SUGGESTED_GOALS = [
-  "Maksimer CO\u2082-reduksjon på tvers av hubben",
-  "Optimaliser spillvarmeutnyttelse fra Hydro",
-  "Øk materialresirkulering mellom bedriftene",
+  "Maksimer CO\u2082-reduksjon p\u00e5 tvers av \u00d8ra",
+  "Optimaliser damplevering fra FREVAR og SAREN",
+  "\u00d8k materialresirkulering mellom bedriftene",
   "Reduser totalt energitap i industriparken",
-  "Utvikle biokarbon-verdikjede med Ottem",
-  "Maksimer økonomisk verdi av nye symbioser",
-  "Forbered hubben for hydrogen-økonomi",
-  "Styrk samarbeid mellom Hydro og kommunen",
+  "Utvikle CCS-klynge med Borg Havn som terminal",
+  "Maksimer \u00f8konomisk verdi av nye symbioser",
+  "Elektrifiser Kronos Titan og Denofa",
+  "Utvid fjernvarmenettverket til 160 GWh",
 ];
 
 // ---------------------------------------------------------------------------
@@ -68,7 +68,7 @@ function buildScenarioPrompt(hub: HubDataset): string {
     .map((b) => `- symbiosisId="${b.symbiosisId}": ${b.title}, NPV=${b.npvMNOK} MNOK, IRR=${(b.irr * 100).toFixed(0)}%, investering=${b.investmentMNOK} MNOK`)
     .join("\n");
 
-  return `Du er en KI-ekspert for industriell symbiose i Sirkulære Sunndal Hub.
+  return `Du er en KI-ekspert for industriell symbiose p\u00e5 \u00d8ra industriomr\u00e5de i Fredrikstad.
 Du skal generere et scenario med konkrete mutasjoner basert på brukerens mål.
 
 BEDRIFTER:

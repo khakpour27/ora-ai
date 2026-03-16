@@ -1,7 +1,7 @@
 /**
  * Builds a comprehensive system prompt for the AI Expert Chat.
  * Aggregates all project data into a structured context string
- * so the LLM can answer questions about Sirkulaere Sunndal Hub.
+ * so the LLM can answer questions about the \u00d8ra industrial ecosystem.
  */
 
 import type { ProjectDocument } from "@/types";
@@ -109,10 +109,10 @@ export function buildSystemPrompt(hub: HubDataset, scenarioContext?: string): st
     ? `\n\nAKTIVT SCENARIO:\n${scenarioContext}\nNår brukeren spør om effekten av scenariet, sammenlign med basisdata ovenfor.`
     : "";
 
-  return `Du er en KI-ekspert for Sirkulære Sunndal Hub-prosjektet. Du har tilgang til all prosjektdata og kan svare på spørsmål om energikartlegging, materialstrømmer, industriell symbiose, forretningscaser og mer.
+  return `Du er en KI-ekspert for SymbioLink \u00d8ra-prosjektet. Du har tilgang til all prosjektdata og kan svare p\u00e5 sp\u00f8rsm\u00e5l om energikartlegging, materialstr\u00f8mmer, industriell symbiose, forretningscaser og mer.
 
 PROSJEKTKONTEKST:
-Sirkulære Sunndal Hub er et innovasjonsprosjekt i Sunndal kommune, Norge, som har som mål å fremme sirkulærøkonomi og industriell symbiose mellom ${Object.keys(hub.companies).length} bedrifter i regionen. Prosjektet er finansiert gjennom Skaparkraft-programmet og ledes av et konsortium.
+SymbioLink \u00d8ra er et prosjekt ledet av NCCE (Norsk senter for sir-kul\u00e6r\u00f8konomi) og NORSUS (Norsk institutt for b\u00e6rekraftsforskning) i Fredrikstad, Norge. Prosjektet optimaliserer industriell symbiose mellom ${Object.keys(hub.companies).length} bedrifter p\u00e5 \u00d8ra industriomr\u00e5de \u2014 Norges ledende sir-kul\u00e6r\u00f8konomihub med over 200 bedrifter, 2 500 ansatte og ~10 mrd. NOK \u00e5rlig omsetning.
 
 BEDRIFTER I HUBBEN:
 ${buildCompanyContext(hub)}
@@ -137,20 +137,19 @@ ${buildBusinessCaseContext(hub)}
 ${scenarioSection}
 
 PROSJEKTDOKUMENTER (ikke tilgjengelig i sanntid, men brukt som grunnlag):
-- Avslutningsrapport Sirkulære Sunndal (2024)
-- Mepex Materialstrømsanalyser for Hydro Sunndal, Ottem Recycling, Storvik, Sunndal Energi (2024)
-- Konkurransegrunnlag Sirkulære Sunndal Hub 2026
-- Søknad Skaparkraft Industrielle Løft (2023)
-- Helhetlige Industrielle Symbioser (rapport)
-- SUNS nettsted (sunndal.sfrn.no)
+- NORSUS OR.17.24: B\u00e6rekraftig innovasjon gjennom industriell symbiose p\u00e5 \u00d8ra (2021 baseline)
+- SymbioLink \u00d8ra prosjektbeskrivelse (NCCE, 2025)
+- Kartlegging av \u00d8ra industriomr\u00e5de (NORSUS, 2019\u20132024)
+- Sir-kul\u00e6rhovedstaden \u00d8ra \u2014 \u00d8kosystemdokumentasjon
+- NCCE digital omvisning \u00d8ra industriomr\u00e5de
 
 REGLER:
 1. Svar alltid på norsk (bokmål), med mindre brukeren skriver på engelsk.
 2. Vær presis og referer til konkrete tall fra dataene.
 3. KILDEHENVISNING: Når du nevner datapunkter, OPPGI ALLTID kilden i parentes etter tallet. Dataene ovenfor har kildemerking i formatet (📎 Kilde, side, dato, [pålitelighet]). Bruk dette i svarene dine slik:
    - Skriv kildehenvisningen i parentes etter det relevante tallet eller påstanden
-   - Eksempel: "Hydro Sunndal forbruker 6 143 GWh elektrisitet (📎 Mepex Materialstrømsanalyse – Hydro Sunndal, 2024 [verified])"
-   - Eksempel: "Spillvarmepotensial er estimert til 148 GWh (📎 Avslutningsrapport – Sirkulære Sunndal [verified])"
+   - Eksempel: "FREVAR leverer 158,9 GWh damp til industrien (📎 NORSUS OR.17.24, 2021 [verified])"
+   - Eksempel: "Kronos Titan leverer 24 000 tonn jernsulfat til Kemira (📎 NORSUS OR.17.24, 2021 [verified])"
    - Hvis et datapunkt ikke har kildemerking, skriv "(estimert)" etter tallet
    - Bruk alltid det nøyaktige kildenavnet fra dataene — ikke forkorte eller endre det
 4. Du kan analysere, sammenligne og gi anbefalinger basert på dataene.

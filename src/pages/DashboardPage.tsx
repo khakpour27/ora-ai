@@ -111,8 +111,8 @@ const MINI_TERRAIN_STYLE: maplibregl.StyleSpecification = {
 };
 
 const MINI_MAP_BOUNDS: [[number, number], [number, number]] = [
-  [8.54, 62.66],
-  [8.58, 62.68],
+  [10.950, 59.180],
+  [10.975, 59.195],
 ];
 
 // ---------------------------------------------------------------------------
@@ -142,10 +142,10 @@ function MiniMapPreview({
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: MINI_TERRAIN_STYLE,
-      center: [8.56, 62.67],
-      zoom: 12,
+      center: [10.96, 59.187],
+      zoom: 13,
       pitch: 50,
-      bearing: 12,
+      bearing: -15,
       attributionControl: false,
       interactive: false,
     });
@@ -323,7 +323,7 @@ export default function DashboardPage() {
   return (
     <PageContainer
       title="Oversikt"
-      description="KI-drevet analyse av Sirkulaere Sunndal Hub"
+      description="KI-drevet analyse av Øra industriområde"
     >
       <motion.div
         variants={staggerContainer}
